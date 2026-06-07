@@ -325,6 +325,7 @@ body{
 
 /* divider */
 .tl-div{height:1px;background:var(--border);margin:10px 0 10px 48px}
+  @media (hover:none) and (pointer:coarse){.print-btn{display:none!important}}
   .print-btn{display:flex;align-items:center;gap:6px;margin-left:auto;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;transition:background .12s}
   .print-btn:hover{background:var(--border)}
   .print-btn svg{display:block}
