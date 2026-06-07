@@ -184,10 +184,6 @@ body{
 }
 .detail-side{margin-left:0}
 
-.acc-cb:checked ~ .detail{max-height:1400px}
-.acc-cb:checked ~ .tl-item .card-head .cta-arrow,
-.acc-cb:checked ~ .tl-side .s-card .cta-arrow,
-.acc-cb:checked ~ .decision-wrap .b-card .cta-arrow{transform:rotate(180deg)}
 
 .detail-inner{
   background:var(--surface);
@@ -335,7 +331,7 @@ body{
   body{background:white!important;padding:0!important;font-size:11pt;color:#000!important}
   .page{max-width:100%!important}
   .print-btn,.card-cta,.close-lbl,.detail-hd .close-lbl{display:none!important}
-  .acc-cb{display:none!important}
+
   .tl-line{background:#ccc!important}
   .tl-dot{border:2pt solid #666!important;background:#f0f0f0!important;color:#000!important;box-shadow:none!important}
   .card{border:1pt solid #bbb!important;background:white!important;break-inside:avoid;box-shadow:none!important;transform:none!important}
@@ -405,7 +401,7 @@ body{
 <div class="timeline">
 
 <!-- ═══ GRUNDREGELN ═══ -->
-<input type="checkbox" class="acc-cb" id="c-grund">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-neu">
@@ -415,21 +411,21 @@ body{
   </div>
   <div class="tl-right">
     <div class="card">
-      <label class="card-head" for="c-grund">
+      <div class="card-head" onclick="tog('c-grund-d')">
         <div class="card-eyebrow ey-neu">Grundregeln</div>
         <div class="card-title tt-neu">Meldepflicht &amp; Entschuldigungspflicht</div>
         <div class="card-sub sub-neu">Sofortige Meldung · schriftliche Entschuldigung am 1. Rückkehrtag</div>
         <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c-grund-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📋</div>
       <div><div class="detail-ey">Grundregeln</div><div class="detail-tt">Meldepflicht &amp; Entschuldigung</div></div>
-      <label class="close-lbl" for="c-grund">✕</label>
+      <button class="close-lbl" onclick="tog('c-grund-d')">✕</button>
     </div>
     <div class="detail-bd">
 
@@ -465,7 +461,7 @@ body{
 
 <div class="tl-gap"></div>
 <!-- ═══ AUSLÖSER ═══ -->
-<input type="checkbox" class="acc-cb" id="c0">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-neu">
@@ -475,21 +471,21 @@ body{
   </div>
   <div class="tl-right">
     <div class="card">
-      <label class="card-head" for="c0">
+      <div class="card-head" onclick="tog('c0-d')">
         <div class="card-eyebrow ey-neu">Auslöser</div>
         <div class="card-title tt-neu">Fehlen ohne Abmeldung</div>
         <div class="card-sub sub-neu">Keine Abmeldung bei der Lehrkraft am Fehltag</div>
         <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c0-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic" style="background:#f2f1ed;font-size:18px">⚠️</div>
       <div><div class="detail-ey">Auslöser</div><div class="detail-tt">Fehlen ohne Abmeldung</div></div>
-      <label class="close-lbl" for="c0">✕</label>
+      <button class="close-lbl" onclick="tog('c0-d')">✕</button>
     </div>
     <div class="detail-bd">
       <div class="ib"><div class="ib-head">Wann greift der Prozess?</div><div class="steps">
@@ -508,7 +504,7 @@ body{
 
 <!-- ═══ SOFORTKONTAKT ═══ -->
 <div class="tl-gap"></div>
-<input type="checkbox" class="acc-cb" id="c3">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-teal" style="font-size:14px;font-weight:800">§</div>
@@ -516,22 +512,22 @@ body{
   </div>
   <div class="tl-right">
     <div class="card" style="border-color:#5dcaa5;background:#e1f5ee">
-      <label class="card-head" for="c3">
+      <div class="card-head" onclick="tog('c3-d')">
         <div class="card-badge badge-teal">ab dem 1. Fehltag</div>
         <div class="card-eyebrow ey-teal">Sofortkontakt</div>
         <div class="card-title tt-teal">Kontakt mit Erziehungs- und Sorgeberechtigten</div>
         <div class="card-sub sub-teal">Telefonisch oder persönlich · bei Misserfolg: schriftlich</div>
         <div class="card-cta cta-teal">Rechtliche Grundlage <span class="cta-arrow" style="background:#9fe1cb">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c3-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic ic-teal" style="font-size:18px">📞</div>
       <div><div class="detail-ey">Pflicht ab dem 1. Fehltag</div><div class="detail-tt">Kontakt mit Erziehungs- und Sorgeberechtigten</div></div>
-      <label class="close-lbl" for="c3">✕</label>
+      <button class="close-lbl" onclick="tog('c3-d')">✕</button>
     </div>
     <div class="detail-bd">
       <div class="ib"><div class="ib-head">Rechtliche Grundlage</div><div class="note teal">§ 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 (SVBl. 1/2026 S. 9): <strong>Bei der ersten ungeklärten Fehlzeit</strong> sind Erziehungs- und Sorgeberechtigte zu informieren und ein Gespräch zu suchen, um Sachverhalt und Ursachen zu klären.</div></div>
@@ -548,7 +544,7 @@ body{
 
 <!-- ═══ 1. MAHNSCHREIBEN ═══ -->
 <div class="tl-gap"></div>
-<input type="checkbox" class="acc-cb" id="c4">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-amb">1</div>
@@ -556,22 +552,22 @@ body{
   </div>
   <div class="tl-right">
     <div class="card card-amb">
-      <label class="card-head" for="c4">
+      <div class="card-head" onclick="tog('c4-d')">
         <div class="card-badge badge-amb">nach 3 Fehltagen</div>
         <div class="card-eyebrow ey-amb">Mahnstufe 1</div>
         <div class="card-title tt-amb">Unentschuldigtes Fernbleiben vom Unterricht</div>
         <div class="card-sub sub-amb">Formular: Erste Mahnung Unterrichtsversäumnisse</div>
         <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c4-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic ic-amb" style="font-size:18px">✉️</div>
       <div><div class="detail-ey">Mahnstufe 1</div><div class="detail-tt">Erste Mahnung Unterrichtsversäumnisse</div></div>
-      <label class="close-lbl" for="c4">✕</label>
+      <button class="close-lbl" onclick="tog('c4-d')">✕</button>
     </div>
     <div class="detail-bd">
       <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Erste Mahnung Unterrichtsversäumnisse</span></div></div>
@@ -588,7 +584,7 @@ body{
 
 <!-- ═══ 2. MAHNSCHREIBEN ═══ -->
 <div class="tl-gap"></div>
-<input type="checkbox" class="acc-cb" id="c5">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-amb">2</div>
@@ -596,22 +592,22 @@ body{
   </div>
   <div class="tl-right">
     <div class="card card-amb">
-      <label class="card-head" for="c5">
+      <div class="card-head" onclick="tog('c5-d')">
         <div class="card-badge badge-amb">nach 3 weiteren Tagen</div>
         <div class="card-eyebrow ey-amb">Mahnstufe 2</div>
         <div class="card-title tt-amb">Nachweispflicht Erkrankung</div>
         <div class="card-sub sub-amb">Ärztliches Attest Pflicht · Einladung zum Gespräch</div>
         <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c5-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic ic-amb" style="font-size:18px">📋</div>
       <div><div class="detail-ey">Mahnstufe 2</div><div class="detail-tt">Nachweispflicht der Erkrankung</div></div>
-      <label class="close-lbl" for="c5">✕</label>
+      <button class="close-lbl" onclick="tog('c5-d')">✕</button>
     </div>
     <div class="detail-bd">
       <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Zweite Mahnung Unterrichtsversäumnisse</span></div></div>
@@ -731,7 +727,7 @@ body{
 <div class="tl-gap"></div>
 <!-- ═══ GESPRÄCHSNOTIZ ═══ -->
 <div class="tl-div"></div>
-<input type="checkbox" class="acc-cb" id="c10">
+
 <div class="tl-item">
   <div class="tl-left">
     <div class="tl-dot dot-neu">
@@ -740,21 +736,21 @@ body{
   </div>
   <div class="tl-right">
     <div class="card">
-      <label class="card-head" for="c10">
+      <div class="card-head" onclick="tog('c10-d')">
         <div class="card-eyebrow ey-neu">Dokumentation</div>
         <div class="card-title tt-neu">Gesprächsprotokoll</div>
         <div class="card-sub sub-neu">Alle Gespräche schriftlich festhalten</div>
         <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
-      </label>
+      </div>
     </div>
   </div>
 </div>
-<div class="detail">
+<div class="detail" id="c10-d">
   <div class="detail-inner">
     <div class="detail-hd">
       <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📝</div>
       <div><div class="detail-ey">Dokumentation</div><div class="detail-tt">Gesprächsprotokoll</div></div>
-      <label class="close-lbl" for="c10">✕</label>
+      <button class="close-lbl" onclick="tog('c10-d')">✕</button>
     </div>
     <div class="detail-bd">
       <div class="ib"><div class="steps">
@@ -775,7 +771,12 @@ body{
 <script>
 function tog(id) {
   var el = document.getElementById(id);
-  var isOpen = el.style.maxHeight !== '0px' && el.style.maxHeight !== '';
+  if (!el) return;
+  var isOpen = el.style.maxHeight && el.style.maxHeight !== '0px' && el.style.maxHeight !== '0';
+  // Close all other panels
+  document.querySelectorAll('.detail').forEach(function(d) {
+    if (d.id !== id) d.style.maxHeight = '0';
+  });
   el.style.maxHeight = isOpen ? '0' : '1400px';
 }
 function printMode(mode) {
