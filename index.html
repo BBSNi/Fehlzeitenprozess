@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Fehlzeitenprozess der BBS Nienburg/Weser – Interaktiver Leitfaden für Lehrkräfte zum Umgang mit unentschuldigtem Fehlen.">
+<meta property="og:title" content="Fehlzeitenprozess · BBS Nienburg/Weser">
+<meta property="og:description" content="Interaktiver Leitfaden für Lehrkräfte zum Umgang mit unentschuldigtem Fehlen.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#dde8e0">
+<title>Fehlzeitenprozess · BBS Nienburg/Weser</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f7f6f2;
+  --surface:#ffffff;
+  --surface2:#f2f1ed;
+  --border:rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.14);
+  --text:#181816;
+  --muted:#6b6a65;
+  --hint:#9e9d98;
+  --radius:16px;
+  --radius-sm:10px;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background-color:#c8ddd0;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(255,255,255,0.7) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 5%, #a8d4bc 0%, transparent 45%),
+    radial-gradient(ellipse at 95% 55%, #9fcfb8 0%, transparent 40%),
+    radial-gradient(ellipse at 5% 80%, #b2d9c4 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 95%, #a5ccba 0%, transparent 40%),
+    radial-gradient(ellipse at 40% 45%, rgba(255,255,255,0.35) 0%, transparent 55%);
+  background-attachment:fixed;
+  color:var(--text);
+  min-height:100vh;
+  padding:32px 16px 64px;
+  line-height:1.5;
+}
+
+.page{max-width:560px;margin:0 auto}
+
+/* ── HEADER ── */
+.header{
+  background:var(--surface);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:20px 22px;
+  margin-bottom:32px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.header-icon{
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(145deg,#2d6a4f,#1d9e75);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.header-icon svg{display:block}
+.header-text h1{font-size:18px;font-weight:700;letter-spacing:-.3px;color:var(--text)}
+.header-text p{font-size:13px;color:var(--hint);margin-top:2px}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:0}
+
+.tl-item{display:flex;gap:0;align-items:stretch}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:48px;flex-shrink:0}
+.tl-dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;flex-shrink:0;
+  border:2px solid transparent;
+}
+.tl-line{width:2px;flex:1;min-height:12px;margin:0 auto}
+.tl-right{flex:1;min-width:0;padding-bottom:6px}
+
+/* side cards row */
+.tl-side{margin-left:48px;display:flex;gap:8px;padding-bottom:6px}
+
+/* spacer between items */
+.tl-gap{height:6px;margin-left:48px}
+
+/* ── CARDS ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,0.09),0 6px 20px rgba(0,0,0,0.07);
+  transition:box-shadow .15s,transform .12s;
+}
+.card:hover{box-shadow:0 3px 8px rgba(0,0,0,0.11),0 8px 20px rgba(0,0,0,0.08);transform:translateY(-1px)}
+.card:has(label:active),.card:active{transform:scale(0.99)}
+
+/* The label IS the card header — clicking toggles checkbox */
+.card-head{
+  display:block;
+  padding:14px 16px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .15s;
+}
+.card-head:hover{background:rgba(0,0,0,0.03)}
+.card-head:active{background:var(--surface2)}
+
+.card-badge{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:600;
+  padding:3px 10px;border-radius:20px;
+  margin-bottom:8px;letter-spacing:.02em;
+}
+.card-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:3px;
+}
+.card-title{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:3px}
+.card-sub{font-size:13px;line-height:1.5}
+.card-cta{
+  display:flex;align-items:center;gap:5px;
+  font-size:12px;margin-top:10px;font-weight:500;
+}
+.cta-arrow{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:50%;
+  font-size:10px;transition:transform .2s;
+}
+
+/* Small cards */
+.s-card{
+  flex:1;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:11px 13px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .12s;
+}
+.s-card:active{background:var(--surface2)}
+.s-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.s-sub{font-size:12px}
+
+/* Branch cards */
+.branches{display:flex;gap:8px}
+.b-card{
+  flex:1;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:11px 13px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .12s;
+}
+.b-card:active{background:var(--surface2)}
+.b-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.b-sub{font-size:12px}
+
+.decision-wrap{
+  margin-left:48px;
+  background:var(--surface);
+  border:1px dashed var(--border2);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  margin-bottom:6px;
+}
+.decision-label{font-size:12px;font-weight:600;color:var(--hint);margin-bottom:10px;letter-spacing:.04em}
+
+/* ── ACCORDION (pure CSS checkbox trick) ── */
+.acc-cb{display:none}
+
+.detail{
+  max-height:0;overflow:hidden;
+  transition:max-height .28s cubic-bezier(.4,0,.2,1);
+  margin-left:48px;
+}
+.detail-side{margin-left:0}
+
+.acc-cb:checked ~ .detail{max-height:1400px}
+.acc-cb:checked ~ .tl-item .card-head .cta-arrow,
+.acc-cb:checked ~ .tl-side .s-card .cta-arrow,
+.acc-cb:checked ~ .decision-wrap .b-card .cta-arrow{transform:rotate(180deg)}
+
+.detail-inner{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-top:4px;
+  margin-bottom:4px;
+}
+.detail-hd{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px 12px;
+  border-bottom:1px solid var(--border);
+}
+.detail-ic{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
+}
+.detail-ey{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--hint);margin-bottom:2px}
+.detail-tt{font-size:15px;font-weight:600;color:var(--text);line-height:1.3}
+.close-lbl{
+  margin-left:auto;
+  display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--surface2);
+  color:var(--muted);font-size:14px;
+  cursor:pointer;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.detail-bd{padding:16px}
+
+/* Info elements */
+.ib{margin-bottom:14px}
+.ib:last-child{margin-bottom:0}
+.ib-head{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--hint);margin-bottom:8px}
+.steps{display:flex;flex-direction:column;gap:7px}
+.step{display:flex;gap:10px;background:var(--surface2);border-radius:8px;padding:9px 12px}
+.step-n{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--border2);color:var(--muted);
+  font-size:11px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.step-t{font-size:13px;line-height:1.5;color:var(--text)}
+.note{
+  border-left:3px solid var(--border2);border-radius:0 8px 8px 0;
+  padding:10px 14px;font-size:13px;line-height:1.5;color:var(--muted);
+  background:var(--surface2);
+}
+.note.teal{border-color:#1d9e75;background:#e1f5ee;color:#085041}
+.note.amber{border-color:#ef9f27;background:#faeeda;color:#854f0b}
+.note.coral{border-color:#d85a30;background:#faece7;color:#712b13}
+.note.red{border-color:#e24b4a;background:#fcebeb;color:#791f1f}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-size:12px;font-weight:500;padding:4px 12px;
+  border-radius:20px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--muted);
+}
+
+/* footer */
+.footer{margin-left:48px;padding-top:12px;font-size:11px;color:var(--hint)}
+
+/* ── COLOR THEMES ── */
+/* neutral */
+.dot-neu{background:#f2f1ed;border-color:#d3d1c7;color:#5f5e5a}
+.ln-neu{background:#d3d1c7}
+.badge-neu{background:#f2f1ed;color:#5f5e5a}
+.ey-neu{color:#5f5e5a}
+.tt-neu{color:#2c2c2a}
+.sub-neu{color:#6b6a65}
+.cta-neu{color:#5f5e5a}.cta-neu .cta-arrow{background:#f2f1ed}
+
+/* teal */
+.dot-teal{background:#e1f5ee;border-color:#5dcaa5;color:#085041}
+.ln-teal{background:#9fe1cb}
+.badge-teal{background:#9fe1cb;color:#085041}
+.ey-teal{color:#0f6e56}
+.tt-teal{color:#04342c}
+.sub-teal{color:#0f6e56}
+.cta-teal{color:#0f6e56}.cta-teal .cta-arrow{background:#e1f5ee}
+.ic-teal{background:#e1f5ee}
+.s-teal{border-color:#5dcaa5!important;background:#e1f5ee!important}
+.s-teal .s-title{color:#04342c}
+.s-teal .s-sub{color:#0f6e56}
+.s-teal .cta-arrow{background:#9fe1cb}
+
+/* amber */
+.dot-amb{background:#faeeda;border-color:#ef9f27;color:#633806}
+.ln-amb{background:#fac775}
+.badge-amb{background:#fac775;color:#412402}
+.ey-amb{color:#854f0b}
+.tt-amb{color:#412402}
+.sub-amb{color:#854f0b}
+.cta-amb{color:#854f0b}.cta-amb .cta-arrow{background:#faeeda}
+.ic-amb{background:#faeeda}
+.card-amb{border-color:#ef9f27!important;background:#faeeda!important}
+.card-amb .card-eyebrow{color:#854f0b}
+.card-amb .card-title{color:#412402}
+.card-amb .card-sub{color:#854f0b}
+
+/* coral */
+.dot-cor{background:#faece7;border-color:#d85a30;color:#4a1b0c}
+.ln-cor{background:#f0997b}
+.badge-cor{background:#f0997b;color:#4a1b0c}
+.ey-cor{color:#993c1d}
+.tt-cor{color:#4a1b0c}
+.sub-cor{color:#993c1d}
+.cta-cor{color:#993c1d}.cta-cor .cta-arrow{background:#faece7}
+.ic-cor{background:#faece7}
+.card-cor{border-color:#d85a30!important;background:#faece7!important}
+.card-cor .card-eyebrow{color:#993c1d}
+.card-cor .card-title{color:#4a1b0c}
+.card-cor .card-sub{color:#993c1d}
+
+/* red */
+.dot-red{background:#fcebeb;border-color:#e24b4a;color:#501313}
+.ln-red{background:#f7c1c1}
+.ic-red{background:#fcebeb}
+.card-red{border-color:#e24b4a!important;background:#fcebeb!important}
+.card-red .card-title{color:#501313}
+.card-red .card-sub{color:#a32d2d}
+.b-red{border-color:#e24b4a!important;background:#fcebeb!important}
+.b-red .b-title{color:#501313}
+.b-red .b-sub{color:#a32d2d}
+.b-red .cta-arrow{background:#f7c1c1}
+
+/* purple */
+.b-pur{border-color:#afa9ec!important;background:#eeedfe!important}
+.b-pur .b-title{color:#26215c}
+.b-pur .b-sub{color:#534ab7}
+.b-pur .cta-arrow{background:#cecbf6}
+.ic-pur{background:#eeedfe}
+
+/* divider */
+.tl-div{height:1px;background:var(--border);margin:10px 0 10px 48px}
+  .print-btn{display:flex;align-items:center;gap:6px;margin-left:auto;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;transition:background .12s}
+  .print-btn:hover{background:var(--border)}
+  .print-btn svg{display:block}
+@media print {
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  body{background:white!important;padding:0!important;font-size:11pt;color:#000!important}
+  .page{max-width:100%!important}
+  .print-btn,.card-cta,.close-lbl,.detail-hd .close-lbl{display:none!important}
+  .acc-cb{display:none!important}
+  .tl-line{background:#ccc!important}
+  .tl-dot{border:2pt solid #666!important;background:#f0f0f0!important;color:#000!important;box-shadow:none!important}
+  .card{border:1pt solid #bbb!important;background:white!important;break-inside:avoid;box-shadow:none!important;transform:none!important}
+  .card-amb,.card-cor,.card-red{background:white!important}
+  .card-badge{border:1pt solid #999!important;background:#f0f0f0!important;color:#333!important}
+  .tl-gap{height:3pt!important}
+  .tl-div{border-top:1pt dashed #ccc;margin:8pt 0 8pt 48px}
+  .footer{font-size:9pt;color:#666!important;border-top:1pt solid #ddd;padding-top:6pt;margin-top:12pt}
+  .header{border:1pt solid #ccc!important;background:white!important;break-inside:avoid;margin-bottom:16pt;box-shadow:none!important}
+
+  /* FLOWCHART: Details ausblenden */
+  body.print-flow .detail{display:none!important}
+
+  /* VOLLSTÄNDIG: Details anzeigen */
+  body.print-all .detail{
+    display:block!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  /* Default (kein Modus): Details ausblenden */
+  .detail{display:none!important}
+  .print-process .detail-inner{
+    border:1pt solid #ccc!important;
+    background:white!important;
+    break-inside:avoid;
+    margin-bottom:6pt;
+    box-shadow:none!important;
+  }
+  .print-process .detail-hd{border-bottom:1pt solid #eee!important}
+  .print-process .step{background:#f5f5f5!important}
+  .print-process .step-n{background:#ddd!important}
+  .print-process .note{background:#f5f5f5!important}
+  .print-process .note.teal{background:#e8f5f0!important}
+  .print-process .note.amber{background:#fdf5e6!important}
+  .print-process .note.coral{background:#fdf0eb!important}
+  .print-process .note.red{background:#fdf0f0!important}
+  .print-process .tl-item{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+‚
+<!-- HEADER -->
+<div class="header">
+  <div style="flex-shrink:0">
+    <div style="font-size:22px;font-weight:800;color:#2d6a4f;letter-spacing:-0.5px;line-height:1">BBS</div>
+    <div style="font-size:11px;font-weight:600;color:#5f5e5a;letter-spacing:.04em;text-transform:uppercase;margin-top:2px">Nienburg/Weser</div>
+  </div>
+  <div class="header-text">
+    <h1>Fehlzeitenprozess</h1>
+    <p> Karten antippen für Details</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-left:auto;width:130px">
+    <button class="print-btn" style="width:100%;justify-content:center" onclick="printMode('flow')" title="Nur Flowchart drucken">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Flowchart
+    </button>
+    <button class="print-btn" style="width:100%;justify-content:center" onclick="printMode('all')" title="Vollständiger Prozess drucken">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Vollständig
+    </button>
+  </div>
+</div>
+
+<div class="timeline">
+
+<!-- ═══ GRUNDREGELN ═══ -->
+<input type="checkbox" class="acc-cb" id="c-grund">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-neu">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div class="tl-line ln-neu"></div>
+  </div>
+  <div class="tl-right">
+    <div class="card">
+      <label class="card-head" for="c-grund">
+        <div class="card-eyebrow ey-neu">Grundregeln</div>
+        <div class="card-title tt-neu">Meldepflicht &amp; Entschuldigungspflicht</div>
+        <div class="card-sub sub-neu">Sofortige Meldung · schriftliche Entschuldigung am 1. Rückkehrtag</div>
+        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📋</div>
+      <div><div class="detail-ey">Grundregeln</div><div class="detail-tt">Meldepflicht &amp; Entschuldigung</div></div>
+      <label class="close-lbl" for="c-grund">✕</label>
+    </div>
+    <div class="detail-bd">
+
+      <div class="ib"><div class="ib-head">1 · Meldepflicht bei Fehlen</div><div class="steps">
+        <div class="step"><div class="step-n">→</div><div class="step-t">Unterrichtsversäumnisse sind der Schule <strong>unverzüglich</strong> zu melden.</div></div>
+        <div class="step"><div class="step-n">→</div><div class="step-t">Meldung per <strong>E-Mail</strong> an die Klassenlehrkraft bzw. Tutorin/Tutor <strong>sowie</strong> an alle betroffenen Lehrkräfte.</div></div>
+        <div class="step"><div class="step-n">→</div><div class="step-t">Meldung durch die Lernenden selbst <strong>oder</strong> durch Erziehungs- und Sorgeberechtigte.</div></div>
+      </div></div>
+
+      <div class="ib"><div class="ib-head">2 · Schriftliche Entschuldigung</div><div class="steps">
+        <div class="step"><div class="step-n">→</div><div class="step-t">Für <strong>jedes</strong> Fehlen ist eine schriftliche Entschuldigung erforderlich — auch für einzelne Stunden oder Verspätungen.</div></div>
+        <div class="step"><div class="step-n">→</div><div class="step-t">Form: <strong>eigenhändig unterschriebene Entschuldigung</strong> oder <strong>ärztliches Attest</strong>.</div></div>
+        <div class="step"><div class="step-n">→</div><div class="step-t">Abgabe bei der <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> — persönlich, eingescannt per Mail oder per Post.</div></div>
+      </div></div>
+
+      <div class="ib"><div class="ib-head">3 · Fristen</div><div class="steps">
+        <div class="step"><div class="step-n">!</div><div class="step-t">Abgabe <strong>am ersten Schultag der Rückkehr</strong>.</div></div>
+        <div class="step"><div class="step-n">!</div><div class="step-t"><strong>Vollzeitlernende:</strong> bei längerer Abwesenheit spätestens am <strong>4. Krankheitstag</strong>.</div></div>
+        <div class="step"><div class="step-n">!</div><div class="step-t"><strong>Teilzeitlernende:</strong> spätestens am nächsten Schultag.</div></div>
+        <div class="step"><div class="step-n">!</div><div class="step-t">Verspätet abgegebene Entschuldigungen <strong>müssen nicht anerkannt werden</strong>.</div></div>
+      </div></div>
+
+      <div class="ib"><div class="ib-head">4 · Unterschriften</div><div class="steps">
+        <div class="step"><div class="step-n">→</div><div class="step-t"><strong>Minderjährige:</strong> Unterschrift der Erziehungs- und Sorgeberechtigten erforderlich.</div></div>
+        <div class="step"><div class="step-n">→</div><div class="step-t"><strong>Auszubildende:</strong> generell auch Unterschrift des <strong>Ausbildungsbetriebes</strong>.</div></div>
+      </div></div>
+
+      <div class="ib"><div class="note amber">Verspätet abgegebene oder fehlende Entschuldigungen führen direkt zur Auslösung des Fehlzeitenprozesses.</div></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="tl-gap"></div>
+<!-- ═══ AUSLÖSER ═══ -->
+<input type="checkbox" class="acc-cb" id="c0">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-neu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="tl-line ln-neu"></div>
+  </div>
+  <div class="tl-right">
+    <div class="card">
+      <label class="card-head" for="c0">
+        <div class="card-eyebrow ey-neu">Auslöser</div>
+        <div class="card-title tt-neu">Fehlen ohne Abmeldung</div>
+        <div class="card-sub sub-neu">Keine Abmeldung bei der Lehrkraft am Fehltag</div>
+        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">⚠️</div>
+      <div><div class="detail-ey">Auslöser</div><div class="detail-tt">Fehlen ohne Abmeldung</div></div>
+      <label class="close-lbl" for="c0">✕</label>
+    </div>
+    <div class="detail-bd">
+      <div class="ib"><div class="ib-head">Wann greift der Prozess?</div><div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Lernende sind verpflichtet, sich am Fehltag bei der <strong>Klassenlehrkraft bzw. den Tutorinnen und Tutoren abzumelden</strong>. Ohne Abmeldung gilt das Fehlen ab dem <strong>1. Tag als unentschuldigt</strong>.</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Klassenlehrkraft bzw. Tutorin/Tutor nimmt <strong>sofort Kontakt</strong> mit Erziehungs- und Sorgeberechtigten auf.</div></div>
+
+      </div></div>
+      <div class="ib"><div class="ib-head">Rechtliche Grundlage</div><div class="note">§ 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 – 21-83100 (SVBl. 1/2026 S. 9)</div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ═══ SOFORTKONTAKT ═══ -->
+<div class="tl-gap"></div>
+<input type="checkbox" class="acc-cb" id="c3">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-teal" style="font-size:14px;font-weight:800">§</div>
+    <div class="tl-line ln-teal"></div>
+  </div>
+  <div class="tl-right">
+    <div class="card" style="border-color:#5dcaa5;background:#e1f5ee">
+      <label class="card-head" for="c3">
+        <div class="card-badge badge-teal">ab dem 1. Fehltag</div>
+        <div class="card-eyebrow ey-teal">Sofortkontakt</div>
+        <div class="card-title tt-teal">Kontakt mit Erziehungs- und Sorgeberechtigten</div>
+        <div class="card-sub sub-teal">Telefonisch oder persönlich · bei Misserfolg: schriftlich</div>
+        <div class="card-cta cta-teal">Rechtliche Grundlage <span class="cta-arrow" style="background:#9fe1cb">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic ic-teal" style="font-size:18px">📞</div>
+      <div><div class="detail-ey">Pflicht ab dem 1. Fehltag</div><div class="detail-tt">Kontakt mit Erziehungs- und Sorgeberechtigten</div></div>
+      <label class="close-lbl" for="c3">✕</label>
+    </div>
+    <div class="detail-bd">
+      <div class="ib"><div class="ib-head">Rechtliche Grundlage</div><div class="note teal">§ 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 (SVBl. 1/2026 S. 9): <strong>Bei der ersten ungeklärten Fehlzeit</strong> sind Erziehungs- und Sorgeberechtigte zu informieren und ein Gespräch zu suchen, um Sachverhalt und Ursachen zu klären.</div></div>
+      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Telefonisch oder persönlich</strong> Kontakt mit Erziehungs- und Sorgeberechtigten aufnehmen — durch Klassenlehrkraft bzw. Tutorin/Tutor.</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Ggf. <strong>Beratungsgespräch</strong> mit Schulsozialarbeit anbieten.</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-t">Kein Kontakt möglich → <strong>schriftlich</strong> informieren.</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-t">Alles in der <strong>Gesprächsnotiz</strong> dokumentieren.</div></div>
+      </div></div>
+      <div class="ib"><div class="ib-head">Volljährige Lernende</div><div class="note">Kein Kontakt mit Erziehungs- und Sorgeberechtigten — direkt mit der/dem Lernenden.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 1. MAHNSCHREIBEN ═══ -->
+<div class="tl-gap"></div>
+<input type="checkbox" class="acc-cb" id="c4">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-amb">1</div>
+    <div class="tl-line ln-amb"></div>
+  </div>
+  <div class="tl-right">
+    <div class="card card-amb">
+      <label class="card-head" for="c4">
+        <div class="card-badge badge-amb">nach 3 Fehltagen</div>
+        <div class="card-eyebrow ey-amb">Mahnstufe 1</div>
+        <div class="card-title tt-amb">Unentschuldigtes Fernbleiben vom Unterricht</div>
+        <div class="card-sub sub-amb">Formular: Erste Mahnung Unterrichtsversäumnisse</div>
+        <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic ic-amb" style="font-size:18px">✉️</div>
+      <div><div class="detail-ey">Mahnstufe 1</div><div class="detail-tt">Erste Mahnung Unterrichtsversäumnisse</div></div>
+      <label class="close-lbl" for="c4">✕</label>
+    </div>
+    <div class="detail-bd">
+      <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Erste Mahnung Unterrichtsversäumnisse</span></div></div>
+      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe 1 ein.</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> erstellt und versendet den Brief.</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-t">Brief wird von <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> unterschrieben.</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-t">Ggf. <strong>Schulsozialarbeit</strong> einbeziehen.</div></div>
+      </div></div>
+      <div class="ib"><div class="ib-head">Inhalt</div><div class="note amber">Hinweis Schulpflicht · Aufforderung zur Entschuldigung · Ankündigung Bußgeld (bei Schulpflicht) · Ankündigung ärztliche Attestpflicht · Hinweis Schulsozialarbeit</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 2. MAHNSCHREIBEN ═══ -->
+<div class="tl-gap"></div>
+<input type="checkbox" class="acc-cb" id="c5">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-amb">2</div>
+    <div class="tl-line ln-cor"></div>
+  </div>
+  <div class="tl-right">
+    <div class="card card-amb">
+      <label class="card-head" for="c5">
+        <div class="card-badge badge-amb">nach 3 weiteren Tagen</div>
+        <div class="card-eyebrow ey-amb">Mahnstufe 2</div>
+        <div class="card-title tt-amb">Nachweispflicht Erkrankung</div>
+        <div class="card-sub sub-amb">Ärztliches Attest Pflicht · Einladung zum Gespräch</div>
+        <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic ic-amb" style="font-size:18px">📋</div>
+      <div><div class="detail-ey">Mahnstufe 2</div><div class="detail-tt">Nachweispflicht der Erkrankung</div></div>
+      <label class="close-lbl" for="c5">✕</label>
+    </div>
+    <div class="detail-bd">
+      <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Zweite Mahnung Unterrichtsversäumnisse</span></div></div>
+      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe nach Rücksprache mit der zuständigen Abteilungsleitung ein.</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> versendet Brief mit konkretem <strong>Gesprächstermin</strong>.</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-t">Brief wird von <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> unterschrieben.</div></div>
+      </div></div>
+      <div class="ib"><div class="ib-head">Inhalt</div><div class="note amber">Ab sofort <strong>ärztliches Attest Pflicht</strong> · Einladung mit Erziehungs- und Sorgeberechtigten · Ankündigung Ordnungsamt (bei Schulpflicht) · Ankündigung der Prüfung, ob ein erfolgreicher Besuch der Schulform nach § 61a NSchG zu erwarten ist (keine Schulpflicht)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ENTSCHEIDUNG + STRÄNGE ═══ -->
+<div class="tl-gap"></div>
+<div class="conn"><div class="conn-line" style="background:#f0997b"></div></div>
+
+<!-- Weitere unentschuldigte Fehltage -->
+<div style="margin-left:48px;margin-bottom:8px">
+  <div style="background:#faece7;border:1px solid #d85a30;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;color:#4a1b0c;text-align:center">
+    Weitere unentschuldigte Fehltage
+  </div>
+</div>
+
+<!-- Verzweigungspunkt + zwei Spalten im tl-item-Stil -->
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot" style="background:#faece7;border:2px solid #d85a30;color:#4a1b0c;font-size:13px;font-weight:800">3</div>
+    <div class="tl-line" style="background:#f0997b"></div>
+  </div>
+  <div class="tl-right" style="padding-bottom:6px">
+
+    <!-- Labels mit integrierten Strichen -->
+    <div style="display:flex;gap:10px;margin-bottom:0">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div style="font-size:11px;font-weight:600;color:#a32d2d;letter-spacing:.04em;text-transform:uppercase">Schulpflichtig</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div style="font-size:11px;font-weight:600;color:#534ab7;letter-spacing:.04em;text-transform:uppercase">Nicht schulpflichtig</div>
+      </div>
+    </div>
+
+    <!-- Zwei Spalten -->
+    <div style="display:flex;gap:10px;align-items:flex-start">
+
+      <!-- LINKS: Schulpflichtig -->
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+        <div class="card card-cor" onclick="tog('d-m3')" style="cursor:pointer;border-top:3px solid #f0997b">
+          <div class="card-head">
+            <div class="card-badge badge-cor">ab 6 unentschuldigten Fehltagen</div>
+            <div class="card-eyebrow ey-cor">Mahnstufe 3</div>
+            <div class="card-title tt-cor">Letztes Schreiben + Anzeige</div>
+            <div class="card-sub sub-cor">Fortgesetzte Schulpflichtverletzung</div>
+            <div class="card-cta cta-cor">Details <span id="arr-m3" class="cta-arrow" style="background:#faece7">▾</span></div>
+          </div>
+        </div>
+        <div id="d-m3" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+          <div class="detail-inner" style="margin-top:4px">
+            <div class="detail-hd">
+              <div class="detail-ic ic-cor" style="font-size:18px">🚨</div>
+              <div><div class="detail-ey">Mahnstufe 3</div><div class="detail-tt">Letztes Schreiben + Anzeige</div></div>
+              <button class="close-lbl" onclick="tog('d-m3')">✕</button>
+            </div>
+            <div class="detail-bd">
+              <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Dritte Mahnung/Anzeige Ordnungswidrigkeit</span></div></div>
+              <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe nach Rücksprache mit der zuständigen Abteilungsleitung ein.</div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> versendet letztes Schreiben.</div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-t"><strong>Anzeige</strong> beim Ordnungsamt Nienburg/Weser.</div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-t">Schulsozialarbeit intensiviert <strong>Kontaktversuche</strong>.</div></div>
+              </div></div>
+              <div class="ib"><div class="note coral">Bußgeld wird erhoben · Schulsozialarbeit bleibt aktiv</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trennlinie -->
+      <div style="width:1px;background:rgba(0,0,0,0.1);border-radius:1px;align-self:stretch;margin-top:0"></div>
+
+      <!-- RECHTS: Nicht schulpflichtig -->
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+        <div class="card" style="border-color:#afa9ec;background:#eeedfe;cursor:pointer;border-top:3px solid #afa9ec" onclick="tog('d-klass')">
+          <div class="card-head">
+            <div class="card-badge" style="background:#cecbf6;color:#26215c">ab 6 unentschuldigten Fehltagen oder Kursfehlstunden</div>
+            <div class="card-eyebrow" style="color:#534ab7">Klassenkonferenz</div>
+            <div class="card-title" style="color:#26215c;font-size:14px">Prüfung, ob erfolgreicher Schulbesuch zu erwarten ist</div>
+            <div class="card-sub" style="color:#534ab7">§ 61a NSchG</div>
+            <div class="card-cta" style="color:#534ab7">Details <span id="arr-klass" class="cta-arrow" style="background:#eeedfe">▾</span></div>
+          </div>
+        </div>
+        <div id="d-klass" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
+          <div class="detail-inner" style="margin-top:4px">
+            <div class="detail-hd">
+              <div class="detail-ic ic-pur" style="font-size:18px">📄</div>
+              <div><div class="detail-ey">Klassenkonferenz</div><div class="detail-tt">Prüfung, ob erfolgreicher Schulbesuch zu erwarten ist</div></div>
+              <button class="close-lbl" onclick="tog('d-klass')">✕</button>
+            </div>
+            <div class="detail-bd">
+              <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Dritte Mahnung/Klassenkonferenz § 61a NSchG</span></div></div>
+              <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-t">Aufforderung zur <strong>sofortigen Unterrichtsteilnahme</strong>.</div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-t">Prüfung ob erfolgreicher Schulbesuch nach <strong>§ 61a NSchG</strong> zu erwarten ist — Klassenkonferenz.</div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-t">Angebot eines <strong>Beratungsgesprächs</strong>.</div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-t">Keine Reaktion → <strong>Abmeldung</strong> von der Schule mit Wirkung ab konkretem Datum.</div></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-top:4px"><div style="width:2px;height:12px;background:#cecbf6;border-radius:1px"></div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="tl-gap"></div>
+<!-- ═══ GESPRÄCHSNOTIZ ═══ -->
+<div class="tl-div"></div>
+<input type="checkbox" class="acc-cb" id="c10">
+<div class="tl-item">
+  <div class="tl-left">
+    <div class="tl-dot dot-neu">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+  </div>
+  <div class="tl-right">
+    <div class="card">
+      <label class="card-head" for="c10">
+        <div class="card-eyebrow ey-neu">Dokumentation</div>
+        <div class="card-title tt-neu">Gesprächsprotokoll</div>
+        <div class="card-sub sub-neu">Alle Gespräche schriftlich festhalten</div>
+        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="detail-inner">
+    <div class="detail-hd">
+      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📝</div>
+      <div><div class="detail-ey">Dokumentation</div><div class="detail-tt">Gesprächsprotokoll</div></div>
+      <label class="close-lbl" for="c10">✕</label>
+    </div>
+    <div class="detail-bd">
+      <div class="ib"><div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Name der/des Lernenden, Klasse, Klassenlehrkraft.</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Gesprächspartner·in, Datum und Uhrzeit.</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-t">Art: persönlich oder telefonisch.</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-t">Stichpunkte zum Inhalt und Vereinbarungen.</div></div>
+        <div class="step"><div class="step-n">5</div><div class="step-t"><strong>Unterschrift</strong> der Klassenlehrkraft bzw. Tutorin/Tutor.</div></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">BBS Nienburg/Weser · Fehlzeitenprozess · Stand 07. Juni 2026</div>
+
+</div>
+</div>
+<script>
+function tog(id) {
+  var el = document.getElementById(id);
+  var isOpen = el.style.maxHeight !== '0px' && el.style.maxHeight !== '';
+  el.style.maxHeight = isOpen ? '0' : '1400px';
+}
+function printMode(mode) {
+  var body = document.body;
+  var proc = document.getElementById('print-process');
+  if (mode === 'flow') {
+    body.classList.remove('print-all');
+    body.classList.add('print-flow');
+    if (proc) proc.style.display = 'none';
+  } else {
+    body.classList.remove('print-flow');
+    body.classList.add('print-all');
+    if (proc) proc.style.display = 'block';
+  }
+  window.print();
+  setTimeout(function() {
+    body.classList.remove('print-flow','print-all');
+    if (proc) proc.style.display = 'none';
+  }, 1000);
+}
+</script>
+</body>
+</html>
