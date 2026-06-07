@@ -773,10 +773,6 @@ function tog(id) {
   var el = document.getElementById(id);
   if (!el) return;
   var isOpen = el.style.maxHeight && el.style.maxHeight !== '0px' && el.style.maxHeight !== '0';
-  // Close all other panels
-  document.querySelectorAll('.detail').forEach(function(d) {
-    if (d.id !== id) d.style.maxHeight = '0';
-  });
   el.style.maxHeight = isOpen ? '0' : '1400px';
 }
 function printMode(mode) {
