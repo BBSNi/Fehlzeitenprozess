@@ -3,796 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Fehlzeitenprozess der BBS Nienburg/Weser – Interaktiver Leitfaden für Lehrkräfte zum Umgang mit unentschuldigtem Fehlen.">
-<meta property="og:title" content="Fehlzeitenprozess · BBS Nienburg/Weser">
-<meta property="og:description" content="Interaktiver Leitfaden für Lehrkräfte zum Umgang mit unentschuldigtem Fehlen.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#dde8e0">
-<title>Fehlzeitenprozess · BBS Nienburg/Weser</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
+<meta name="color-scheme" content="light only">
+<meta name="description" content="Fehlzeitenprozess der BBS Nienburg/Weser – Leitfaden für Lehrkräfte zum Umgang mit unentschuldigtem Fehlen.">
+<title>Fehlzeitenprozess | BBS Nienburg/Weser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --bg:#f7f6f2;
-  --surface:#ffffff;
-  --surface2:#f2f1ed;
-  --border:rgba(0,0,0,0.08);
-  --border2:rgba(0,0,0,0.14);
-  --text:#181816;
-  --muted:#6b6a65;
-  --hint:#9e9d98;
-  --radius:16px;
-  --radius-sm:10px;
+  --blau:#1D4E9E;
+  --blau-dunkel:#0E2A54;
+  --gruen:#63B32E;
+  --gruen-dunkel:#4E9A1F;
+  --gruen-tief:#1E5E23;
+  --gruen-hell:#EDF7E4;
+  --blau-hell:#EEF3FB;
+  --tinte:#14202E;
+  --grau:#5A6472;
+  --linie:#E6EBF2;
+  --weiss:#FFFFFF;
+  --papier:#F6F9F3;
+  --radius:20px;
+  --content:1040px;
+  --schatten:0 1px 2px rgba(16,34,64,.04),0 8px 24px rgba(16,34,64,.06);
+  --schatten-hover:0 2px 4px rgba(16,34,64,.05),0 18px 40px rgba(16,34,64,.12);
+  /* Rechner-spezifisch */
+  --erf-bg:#EDF7E4;--erf-line:#D2E9BE;
+  --fail-bg:#FBEAE8;--fail-line:#F0CFC9;--fail-text:#B25049;
+  color-scheme:light only;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--papier)}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--tinte);background:var(--papier);line-height:1.65;font-size:16px;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;line-height:1.14;letter-spacing:-.02em}
+a{color:var(--gruen-dunkel)}
+::selection{background:var(--gruen);color:#fff}
+
+#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;background:linear-gradient(90deg,var(--gruen),var(--gruen-dunkel));opacity:.95;transition:width .1s linear}
+
+/* Navigation */
+nav{position:sticky;top:0;z-index:50;background:rgba(246,249,243,.82);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid var(--linie)}
+.nav-inner{max-width:var(--content);margin:0 auto;display:flex;align-items:center;gap:20px;padding:14px 24px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-img{height:38px;width:auto;display:block}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.nav-links a{text-decoration:none;color:var(--grau);font-size:.86rem;font-weight:600;padding:8px 14px;border-radius:999px;transition:color .2s,background .2s}
+.nav-links a:hover,.nav-links a:focus-visible{background:var(--gruen-hell);color:var(--gruen-dunkel)}
+.nav-links a.active{background:var(--gruen-dunkel);color:#fff}
+.nav-links a.zurueck{color:var(--gruen-dunkel);background:var(--gruen-hell)}
+.nav-links a.zurueck:hover{background:#E0F1D0}
+
+/* Hero */
+header{position:relative;overflow:hidden;background:radial-gradient(130% 130% at 12% 0%,#2E7D32 0%,#1E5E23 45%,#123F1A 100%);color:#fff}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.blob.b1{width:540px;height:540px;background:#5FA136;top:-170px;right:-130px;opacity:.32}
+.blob.b2{width:400px;height:400px;background:#1D4E9E;bottom:-200px;left:-100px;opacity:.18}
+.hero{max-width:var(--content);margin:0 auto;padding:92px 24px 116px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#EAF7DF;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:999px;margin-bottom:26px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#BFE6A0;box-shadow:0 0 0 4px rgba(191,230,160,.28)}
+.hero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);font-weight:700;max-width:17ch;margin-bottom:20px;letter-spacing:-.03em;line-height:1.03}
+.hero h1 .akz{color:#BFE6A0}
+.hero p{max-width:60ch;font-size:clamp(1rem,1.6vw,1.16rem);color:#D6E8C9}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:40px;max-width:760px}
+.hero-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px 18px;transition:transform .3s,background .3s}
+.hero-chip:hover{transform:translateY(-4px);background:rgba(255,255,255,.12)}
+.hero-chip strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.4rem;letter-spacing:-.02em;color:#fff}
+.hero-chip span{font-size:.78rem;color:#C4DDB4}
+.hero-wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;display:block;z-index:1}
+
+/* Layout */
+main{max-width:var(--content);margin:0 auto;padding:0 24px}
+section{padding:74px 0;border-bottom:1px solid var(--linie);scroll-margin-top:78px}
+section:last-of-type{border-bottom:none}
+.kicker{display:inline-block;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gruen-dunkel);margin-bottom:12px;padding-bottom:3px;border-bottom:1px solid var(--gruen)}
+section h2{font-size:clamp(1.7rem,3.8vw,2.5rem);color:var(--gruen-tief);margin-bottom:16px;letter-spacing:-.03em}
+section p.lead{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--grau);max-width:66ch;margin-bottom:8px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.vis{opacity:1;transform:none}
+
+.hinweis{background:var(--weiss);border:1px solid var(--linie);border-left:3px solid var(--gruen);padding:18px 22px;border-radius:0 14px 14px 0;margin:22px 0;box-shadow:var(--schatten)}
+.hinweis strong{color:var(--gruen-tief)}
+.hinweis p{margin-bottom:8px}.hinweis p:last-child{margin-bottom:0}
+
+/* ===== Rechner-Raster ===== */
+.rechner-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:30px}
+.form-col,.rail{min-width:0}
+@media(min-width:900px){
+  .rechner-grid{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);gap:26px;align-items:start}
+  .rail{position:sticky;top:88px}
+}
+.rcard{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--radius);box-shadow:var(--schatten);overflow:hidden}
+.rcard + .rcard{margin-top:22px}
+.rcard-head{display:flex;align-items:center;gap:13px;padding:20px 24px 0}
+.rcard-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;color:var(--gruen-dunkel);background:var(--gruen-hell);border:1px solid var(--erf-line);width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.rcard-head h3{font-size:1.18rem;color:var(--gruen-tief);margin:0}
+.rcard-head .tag{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--grau);background:var(--papier);border:1px solid var(--linie);padding:5px 11px;border-radius:999px;white-space:nowrap}
+.rcard-body{padding:16px 24px 24px}
+
+/* Felder */
+.feld{display:flex;flex-direction:column;gap:7px}
+.feld-row{display:flex;flex-wrap:wrap;gap:16px}
+.feld-row .feld{flex:1 1 180px;min-width:0}
+label.lbl{font-size:.82rem;font-weight:600;color:var(--grau);letter-spacing:.01em}
+input[type=text]{font-family:inherit;font-size:1rem;color:var(--tinte);background:var(--papier);border:1px solid var(--linie);border-radius:11px;padding:10px 13px;width:100%;transition:border-color .18s,background .18s,box-shadow .18s}
+input[type=text]:focus{outline:none;background:#fff;border-color:var(--gruen);box-shadow:0 0 0 3px var(--gruen-hell)}
+
+/* Semester-Auswahl */
+.seg{display:flex;flex-wrap:wrap;gap:9px;margin-top:2px}
+.seg label{flex:1 1 170px;cursor:pointer;position:relative;border:1px solid var(--linie);border-radius:13px;padding:13px 15px;background:var(--papier);transition:border-color .18s,background .18s}
+.seg label:hover{border-color:var(--gruen)}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.seg .t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.98rem;display:block;color:var(--tinte)}
+.seg .d{font-size:.8rem;color:var(--grau);margin-top:2px}
+.seg label:has(input:checked){border-color:var(--gruen-dunkel);background:var(--gruen-hell)}
+.seg label:has(input:checked) .t{color:var(--gruen-tief)}
+.seg label:has(input:focus-visible){box-shadow:0 0 0 3px var(--gruen-hell)}
+
+/* Notentabellen */
+.gtab{width:100%;border-collapse:collapse;margin-top:4px}
+.gtab th{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grau);text-align:left;padding:0 8px 9px;border-bottom:1px solid var(--linie);vertical-align:bottom}
+.gtab th.pt{text-align:center;width:78px}
+.gtab td{padding:7px 8px;border-bottom:1px solid var(--linie);vertical-align:middle}
+.gtab tbody tr:last-child td{border-bottom:none}
+.rowtag{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.82rem;background:var(--gruen-dunkel);color:#fff;border-radius:8px;padding:3px 9px;display:inline-block;min-width:30px;text-align:center}
+.rowtag.soft{background:var(--gruen-hell);color:var(--gruen-dunkel);border:1px solid var(--erf-line)}
+td.subj{width:100%}
+td.subj input{font-size:.94rem;padding:9px 11px;min-width:0}
+select.subj{font-family:inherit;font-size:.94rem;color:var(--tinte);background:var(--papier);border:1px solid var(--linie);border-radius:11px;padding:9px 11px;width:100%;min-width:0;transition:border-color .18s,box-shadow .18s}
+select.subj:focus{outline:none;border-color:var(--gruen);box-shadow:0 0 0 3px var(--gruen-hell);background:#fff}
+td.ptcell{text-align:center}
+input.pt{font-family:'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;font-weight:700;font-size:1.05rem;text-align:center;width:64px;padding:9px 4px;background:var(--papier);border:1px solid var(--linie);border-radius:11px;color:var(--tinte);transition:border-color .18s,box-shadow .18s,background .18s;-moz-appearance:textfield}
+input.pt::-webkit-outer-spin-button,input.pt::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input.pt:focus{outline:none;background:#fff;border-color:var(--gruen);box-shadow:0 0 0 3px var(--gruen-hell)}
+input.pt.filled{border-color:var(--erf-line);background:var(--erf-bg)}
+input.pt.low{border-color:var(--fail-line);background:var(--fail-bg);color:var(--fail-text)}
+td.leer{background:repeating-linear-gradient(135deg,transparent 0 7px,rgba(20,32,46,.045) 7px 8px)}
+.leer-note{font-size:.72rem;color:#9aa3ad;font-style:italic}
+
+/* Halbjahr-Auswahl für Fach 8 */
+.hj8{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.hj8-lbl{font-size:.72rem;color:var(--grau);font-weight:600}
+.hj8-btn{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:600;color:var(--grau);background:var(--papier);border:1px solid var(--linie);border-radius:8px;padding:3px 11px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.hj8-btn:hover{border-color:var(--gruen)}
+.hj8-btn.active{background:var(--gruen-hell);border-color:var(--gruen-dunkel);color:var(--gruen-tief)}
+.hj8-btn:focus-visible{outline:2px solid var(--gruen);outline-offset:1px}
+
+/* Zwischensumme */
+.zsumme{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px;padding:14px 18px;border-radius:14px;background:var(--papier);border:1px solid var(--linie)}
+.zsumme .s{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.98rem;color:var(--tinte)}
+.zsumme .s b{font-size:1.4rem;font-variant-numeric:tabular-nums}
+.zsumme .req{font-size:.8rem;color:var(--grau);margin-left:auto;text-align:right;max-width:46ch}
+.flag{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.8rem;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.flag .dot{width:8px;height:8px;border-radius:50%}
+.flag.ok{background:var(--erf-bg);color:var(--gruen-tief);border:1px solid var(--erf-line)}
+.flag.ok .dot{background:var(--gruen-dunkel)}
+.flag.no{background:var(--fail-bg);color:var(--fail-text);border:1px solid var(--fail-line)}
+.flag.no .dot{background:var(--fail-text)}
+.flag.idle{background:#EEF1ED;color:#9aa3ad;border:1px solid var(--linie)}
+.flag.idle .dot{background:#9aa3ad}
+
+/* Pflichtfächer-Status */
+.faecher-status{margin-top:14px;font-size:.86rem;font-weight:600;padding:12px 15px;border-radius:12px;display:flex;align-items:flex-start;gap:9px;line-height:1.45}
+.faecher-status .fi{flex:none;font-size:1rem;line-height:1.35}
+.faecher-status.idle{background:var(--papier);border:1px solid var(--linie);color:var(--grau)}
+.faecher-status.ok{background:var(--erf-bg);border:1px solid var(--erf-line);color:var(--gruen-tief)}
+.faecher-status.no{background:var(--fail-bg);border:1px solid var(--fail-line);color:var(--fail-text)}
+
+/* Ergebnis-Karte */
+.ergebnis{background:linear-gradient(165deg,#1E5E23,#123F1A);color:#EAF7DF;border-radius:var(--radius);box-shadow:0 14px 44px rgba(18,63,26,.28);overflow:hidden;position:relative}
+.ergebnis::after{content:"";position:absolute;width:180px;height:180px;background:radial-gradient(circle,rgba(143,208,92,.24),transparent 70%);top:-60px;right:-50px;pointer-events:none}
+.e-top{padding:24px 26px 20px;position:relative}
+.e-eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#BFE6A0}
+.note-badge{display:flex;align-items:flex-end;gap:16px;margin-top:8px}
+.note-num{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:.9;font-size:4.4rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#fff;transition:transform .25s cubic-bezier(.2,.8,.3,1.2)}
+.note-num.pulse{transform:scale(1.06)}
+.note-meta{padding-bottom:9px}
+.note-meta .k{font-size:.78rem;color:#C4DDB4}
+.note-meta .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:#fff}
+.e-verdict{margin-top:18px;padding:12px 15px;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:10px}
+.e-verdict.ok{background:rgba(143,208,92,.18);color:#DCF3C6}
+.e-verdict.no{background:rgba(224,138,124,.16);color:#F3C9C1}
+.e-verdict .b{font-size:1.15rem;flex:none}
+
+.prog{padding:2px 26px 22px;position:relative}
+.prog-lbl{display:flex;justify-content:space-between;font-size:.78rem;color:#C4DDB4;margin:14px 0 8px}
+.prog-lbl b{color:#fff;font-family:'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums}
+.track{height:10px;border-radius:6px;background:rgba(255,255,255,.13);position:relative;overflow:hidden}
+.track .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#63B32E,#BFE6A0);width:0;transition:width .45s cubic-bezier(.3,.7,.2,1)}
+.track .mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:rgba(255,255,255,.6)}
+.track-leg{display:flex;justify-content:space-between;font-size:.66rem;color:#9CBE86;margin-top:7px}
+
+.checks{border-top:1px solid rgba(255,255,255,.12);padding:16px 26px 20px}
+.check{display:flex;align-items:center;gap:12px;padding:9px 0}
+.check + .check{border-top:1px solid rgba(255,255,255,.08)}
+.check .ic{width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;font-size:.95rem;font-weight:700}
+.check .ic.ok{background:rgba(143,208,92,.22);color:#BFE6A0}
+.check .ic.no{background:rgba(224,138,124,.2);color:#F3C9C1}
+.check .ic.idle{background:rgba(255,255,255,.09);color:#9CBE86}
+.check .txt{font-size:.86rem;line-height:1.32}
+.check .txt .cn{font-family:'Space Grotesk',sans-serif;font-weight:600;color:#fff}
+.check .txt .cd{color:#C4DDB4;font-size:.74rem}
+.check .val{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;font-variant-numeric:tabular-nums;color:#fff}
+
+.e-actions{padding:0 26px 24px;display:flex;gap:11px}
+.print-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#EAF7DF;color:var(--gruen-tief);border:none;border-radius:999px;padding:11px 16px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.86rem;cursor:pointer;transition:background .2s,transform .15s;flex:1}
+.print-btn:hover{background:#fff;transform:translateY(-1px)}
+.print-btn:focus-visible{outline:3px solid rgba(255,255,255,.5);outline-offset:2px}
+.print-btn svg{width:16px;height:16px}
+.reset-btn{background:transparent;color:#C4DDB4;border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:11px 16px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.86rem;cursor:pointer;transition:color .2s,border-color .2s;flex:1}
+.reset-btn:hover{color:#fff;border-color:rgba(255,255,255,.45)}
+
+/* Fächer-Karten */
+.karten{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:26px 0 0}
+.karte{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--radius);padding:24px;box-shadow:var(--schatten);position:relative;overflow:hidden}
+.karte::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gruen)}
+.karte.blau::before{background:var(--blau)}
+.karte h4{color:var(--gruen-tief);margin-bottom:10px;font-size:1.05rem}
+.karte.blau h4{color:var(--blau-dunkel)}
+.karte ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.karte li{position:relative;padding-left:16px;font-size:.9rem;color:var(--grau)}
+.karte li::before{content:"›";position:absolute;left:0;color:var(--gruen);font-weight:700}
+.karte.blau li::before{color:var(--blau)}
+
+/* Umrechnungstabelle */
+.tab-wrap{overflow-x:auto;margin:26px 0 0;border:1px solid var(--linie);border-radius:var(--radius);box-shadow:var(--schatten);background:#fff}
+table.umr{border-collapse:collapse;width:100%;font-size:.9rem}
+table.umr th,table.umr td{padding:10px 16px;text-align:left;border:1px solid var(--linie);font-variant-numeric:tabular-nums}
+table.umr thead th{background:var(--gruen-dunkel);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.82rem;border-color:var(--gruen-dunkel);position:sticky;top:0}
+table.umr td.note{font-family:'Space Grotesk',sans-serif;font-weight:700;text-align:right;color:var(--gruen-tief)}
+table.umr tr.active td{background:var(--gruen-hell);color:var(--gruen-tief)}
+table.umr tr.active td.note{color:var(--gruen-dunkel)}
+.umr-hint{font-size:.8rem;color:var(--grau);margin-top:10px}
+
+footer{background:linear-gradient(165deg,#1E5E23,#123F1A);color:#C4DDB4}.footer-inner{max-width:var(--content);margin:0 auto;padding:44px 24px;font-size:.86rem;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-inner strong{color:#fff;font-family:'Space Grotesk',sans-serif}
+.footer-inner a{color:#EAF7DF}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .blob{display:none}
+  *{transition:none!important}
+}
+@media (max-width:640px){
+  .hero{padding:66px 22px 84px}
+  section{padding:52px 0}
+  .nav-links{width:100%;overflow-x:auto;flex-wrap:nowrap;margin-left:0;padding-bottom:2px}
+  .nav-links a{white-space:nowrap}
+  .zsumme .req{margin-left:0;text-align:left;max-width:none}
+  .rcard-body{padding:14px 16px 18px}
+  .rcard-head{padding:16px 16px 0}
+  .gtab th,.gtab td{padding:6px 5px}
+  .gtab th.pt{width:52px}
+  input.pt{width:46px;font-size:1rem;padding:8px 2px}
+  .rowtag{min-width:26px;padding:3px 6px}
 }
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-  background-color:#c8ddd0;
-  background-image:
-    radial-gradient(ellipse at 15% 10%, rgba(255,255,255,0.7) 0%, transparent 40%),
-    radial-gradient(ellipse at 85% 5%, #a8d4bc 0%, transparent 45%),
-    radial-gradient(ellipse at 95% 55%, #9fcfb8 0%, transparent 40%),
-    radial-gradient(ellipse at 5% 80%, #b2d9c4 0%, transparent 45%),
-    radial-gradient(ellipse at 60% 95%, #a5ccba 0%, transparent 40%),
-    radial-gradient(ellipse at 40% 45%, rgba(255,255,255,0.35) 0%, transparent 55%);
-  background-attachment:fixed;
-  color:var(--text);
-  min-height:100vh;
-  padding:32px 16px 64px;
-  line-height:1.5;
+/* ---------- Druck (A4) ---------- */
+@page{ size:A4 portrait; margin:14mm; }
+@media print{
+  html,body{background:#fff;font-size:10pt}
+  /* Alles ausblenden außer den wichtigen Eingaben links */
+  #progress,nav,footer,details.ref,.blob,.hero-wave,.e-actions,
+  .hero .eyebrow,.hero p,.hero-stats,
+  #faecher,#tabelle,.rail,.zsumme,.faecher-status{display:none!important}
+
+  main{max-width:none;padding:0}
+  header{background:#fff;color:#000;overflow:visible;border-radius:0}
+  .hero{padding:0 0 6px;max-width:none}
+  .hero h1,.hero h1 .akz{color:#000;font-size:15pt;margin:0;max-width:none}
+
+  section#rechner{padding:6px 0 0;border:none}
+  section#rechner>.kicker,section#rechner>h2,section#rechner>p.lead{display:none!important}
+  .rechner-grid{display:block;margin:0}
+  .form-col{min-width:0}
+
+  .rcard{box-shadow:none;border:1px solid #999;border-radius:6px;margin:0 0 8px;break-inside:avoid}
+  .rcard+.rcard{margin-top:8px}
+  .rcard-head{padding:7px 10px 0}
+  .rcard-head h3{font-size:11pt;color:#000}
+  .rcard-num{background:#000;color:#fff;border:none;width:19px;height:19px;font-size:9pt}
+  .rcard-head .tag{display:none}
+  .rcard-body{padding:7px 10px 9px}
+
+  .feld{gap:2px}
+  label.lbl{color:#000;font-size:8.5pt}
+  input[type=text]{border:1px solid #999;background:#fff;color:#000;padding:4px 8px;font-size:10.5pt}
+
+  /* nur das gewählte Kurshalbjahr zeigen */
+  .feld>.lbl{margin-top:2px}
+  .seg{gap:0;margin-top:2px}
+  .seg label{display:none!important}
+  .seg label.chosen{display:inline-block!important;border:1px solid #000;background:#fff;padding:5px 12px;border-radius:6px}
+  .seg label.chosen .t{color:#000;font-size:10pt}
+  .seg label.chosen .d{color:#333;font-size:8.5pt}
+
+  /* Fächer- und Notentabelle auf A4 skaliert */
+  .gtab{font-size:10pt;width:100%;table-layout:fixed}
+  .gtab th{color:#000;border-color:#999;padding:0 4px 4px;font-size:7.5pt}
+  .gtab th.pt{width:14%}
+  .gtab td{border-color:#ddd;padding:3px 4px}
+  .rowtag{background:#000;color:#fff}
+  .rowtag.soft{background:#eee;color:#000;border:1px solid #999}
+  select.subj{-webkit-appearance:none;appearance:none;border:1px solid #999;background:#fff;color:#000;padding:3px 6px;font-size:10pt;width:100%}
+  input.pt{background:#fff!important;border:1px solid #999;color:#000!important;width:100%;padding:3px 2px;font-size:10.5pt}
+  td.leer{background:#fff}
+  .hj8{display:none!important}
 }
 
-.page{max-width:560px;margin:0 auto}
-
-/* ── HEADER ── */
-.header{
-  background:var(--surface);
-  border-radius:var(--radius);
-  border:1px solid var(--border);
-  padding:20px 22px;
-  margin-bottom:32px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-.header-icon{
-  width:48px;height:48px;border-radius:14px;
-  background:linear-gradient(145deg,#2d6a4f,#1d9e75);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.header-icon svg{display:block}
-.header-text h1{font-size:18px;font-weight:700;letter-spacing:-.3px;color:var(--text)}
-.header-text p{font-size:13px;color:var(--hint);margin-top:2px}
-
-/* ── TIMELINE ── */
-.timeline{display:flex;flex-direction:column;gap:0}
-
-.tl-item{display:flex;gap:0;align-items:stretch}
-.tl-left{display:flex;flex-direction:column;align-items:center;width:48px;flex-shrink:0}
-.tl-dot{
-  width:32px;height:32px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;flex-shrink:0;
-  border:2px solid transparent;
-}
-.tl-line{width:2px;flex:1;min-height:12px;margin:0 auto}
-.tl-right{flex:1;min-width:0;padding-bottom:6px}
-
-/* side cards row */
-.tl-side{margin-left:48px;display:flex;gap:8px;padding-bottom:6px}
-
-/* spacer between items */
-.tl-gap{height:6px;margin-left:48px}
-
-/* ── CARDS ── */
-.card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:0 2px 6px rgba(0,0,0,0.09),0 6px 20px rgba(0,0,0,0.07);
-  transition:box-shadow .15s,transform .12s;
-}
-.card:hover{box-shadow:0 3px 8px rgba(0,0,0,0.11),0 8px 20px rgba(0,0,0,0.08);transform:translateY(-1px)}
-.card:has(label:active),.card:active{transform:scale(0.99)}
-
-/* The label IS the card header — clicking toggles checkbox */
-.card-head{
-  display:block;
-  padding:14px 16px;
-  cursor:pointer;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .15s;
-}
-.card-head:hover{background:rgba(0,0,0,0.03)}
-.card-head:active{background:var(--surface2)}
-
-.card-badge{
-  display:inline-flex;align-items:center;
-  font-size:11px;font-weight:600;
-  padding:3px 10px;border-radius:20px;
-  margin-bottom:8px;letter-spacing:.02em;
-}
-.card-eyebrow{
-  font-size:11px;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;margin-bottom:3px;
-}
-.card-title{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:3px}
-.card-sub{font-size:13px;line-height:1.5}
-.card-cta{
-  display:flex;align-items:center;gap:5px;
-  font-size:12px;margin-top:10px;font-weight:500;
-}
-.cta-arrow{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:18px;height:18px;border-radius:50%;
-  font-size:10px;transition:transform .2s;
-}
-
-/* Small cards */
-.s-card{
-  flex:1;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius-sm);
-  padding:11px 13px;
-  cursor:pointer;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .12s;
-}
-.s-card:active{background:var(--surface2)}
-.s-title{font-size:13px;font-weight:600;margin-bottom:2px}
-.s-sub{font-size:12px}
-
-/* Branch cards */
-.branches{display:flex;gap:8px}
-.b-card{
-  flex:1;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius-sm);
-  padding:11px 13px;
-  cursor:pointer;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .12s;
-}
-.b-card:active{background:var(--surface2)}
-.b-title{font-size:13px;font-weight:600;margin-bottom:2px}
-.b-sub{font-size:12px}
-
-.decision-wrap{
-  margin-left:48px;
-  background:var(--surface);
-  border:1px dashed var(--border2);
-  border-radius:var(--radius);
-  padding:14px 16px;
-  margin-bottom:6px;
-}
-.decision-label{font-size:12px;font-weight:600;color:var(--hint);margin-bottom:10px;letter-spacing:.04em}
-
-/* ── ACCORDION (pure CSS checkbox trick) ── */
-.acc-cb{display:none}
-
-.detail{
-  max-height:0;overflow:hidden;
-  transition:max-height .28s cubic-bezier(.4,0,.2,1);
-  margin-left:48px;
-}
-.detail-side{margin-left:0}
-
-
-.detail-inner{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  margin-top:4px;
-  margin-bottom:4px;
-}
-.detail-hd{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 16px 12px;
-  border-bottom:1px solid var(--border);
-}
-.detail-ic{
-  width:36px;height:36px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:17px;flex-shrink:0;
-}
-.detail-ey{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--hint);margin-bottom:2px}
-.detail-tt{font-size:15px;font-weight:600;color:var(--text);line-height:1.3}
-.close-lbl{
-  margin-left:auto;
-  display:flex;align-items:center;justify-content:center;
-  width:28px;height:28px;border-radius:50%;
-  background:var(--surface2);
-  color:var(--muted);font-size:14px;
-  cursor:pointer;flex-shrink:0;
-  -webkit-tap-highlight-color:transparent;
-}
-.detail-bd{padding:16px}
-
-/* Info elements */
-.ib{margin-bottom:14px}
-.ib:last-child{margin-bottom:0}
-.ib-head{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--hint);margin-bottom:8px}
-.steps{display:flex;flex-direction:column;gap:7px}
-.step{display:flex;gap:10px;background:var(--surface2);border-radius:8px;padding:9px 12px}
-.step-n{
-  width:20px;height:20px;border-radius:50%;
-  background:var(--border2);color:var(--muted);
-  font-size:11px;font-weight:600;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
-}
-.step-t{font-size:13px;line-height:1.5;color:var(--text)}
-.note{
-  border-left:3px solid var(--border2);border-radius:0 8px 8px 0;
-  padding:10px 14px;font-size:13px;line-height:1.5;color:var(--muted);
-  background:var(--surface2);
-}
-.note.teal{border-color:#1d9e75;background:#e1f5ee;color:#085041}
-.note.amber{border-color:#ef9f27;background:#faeeda;color:#854f0b}
-.note.coral{border-color:#d85a30;background:#faece7;color:#712b13}
-.note.red{border-color:#e24b4a;background:#fcebeb;color:#791f1f}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{
-  font-size:12px;font-weight:500;padding:4px 12px;
-  border-radius:20px;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--muted);
-}
-
-/* footer */
-.footer{margin-left:48px;padding-top:12px;font-size:11px;color:var(--hint)}
-
-/* ── COLOR THEMES ── */
-/* neutral */
-.dot-neu{background:#f2f1ed;border-color:#d3d1c7;color:#5f5e5a}
-.ln-neu{background:#d3d1c7}
-.badge-neu{background:#f2f1ed;color:#5f5e5a}
-.ey-neu{color:#5f5e5a}
-.tt-neu{color:#2c2c2a}
-.sub-neu{color:#6b6a65}
-.cta-neu{color:#5f5e5a}.cta-neu .cta-arrow{background:#f2f1ed}
-
-/* teal */
-.dot-teal{background:#e1f5ee;border-color:#5dcaa5;color:#085041}
-.ln-teal{background:#9fe1cb}
-.badge-teal{background:#9fe1cb;color:#085041}
-.ey-teal{color:#0f6e56}
-.tt-teal{color:#04342c}
-.sub-teal{color:#0f6e56}
-.cta-teal{color:#0f6e56}.cta-teal .cta-arrow{background:#e1f5ee}
-.ic-teal{background:#e1f5ee}
-.s-teal{border-color:#5dcaa5!important;background:#e1f5ee!important}
-.s-teal .s-title{color:#04342c}
-.s-teal .s-sub{color:#0f6e56}
-.s-teal .cta-arrow{background:#9fe1cb}
-
-/* amber */
-.dot-amb{background:#faeeda;border-color:#ef9f27;color:#633806}
-.ln-amb{background:#fac775}
-.badge-amb{background:#fac775;color:#412402}
-.ey-amb{color:#854f0b}
-.tt-amb{color:#412402}
-.sub-amb{color:#854f0b}
-.cta-amb{color:#854f0b}.cta-amb .cta-arrow{background:#faeeda}
-.ic-amb{background:#faeeda}
-.card-amb{border-color:#ef9f27!important;background:#faeeda!important}
-.card-amb .card-eyebrow{color:#854f0b}
-.card-amb .card-title{color:#412402}
-.card-amb .card-sub{color:#854f0b}
-
-/* coral */
-.dot-cor{background:#faece7;border-color:#d85a30;color:#4a1b0c}
-.ln-cor{background:#f0997b}
-.badge-cor{background:#f0997b;color:#4a1b0c}
-.ey-cor{color:#993c1d}
-.tt-cor{color:#4a1b0c}
-.sub-cor{color:#993c1d}
-.cta-cor{color:#993c1d}.cta-cor .cta-arrow{background:#faece7}
-.ic-cor{background:#faece7}
-.card-cor{border-color:#d85a30!important;background:#faece7!important}
-.card-cor .card-eyebrow{color:#993c1d}
-.card-cor .card-title{color:#4a1b0c}
-.card-cor .card-sub{color:#993c1d}
-
-/* red */
-.dot-red{background:#fcebeb;border-color:#e24b4a;color:#501313}
-.ln-red{background:#f7c1c1}
-.ic-red{background:#fcebeb}
-.card-red{border-color:#e24b4a!important;background:#fcebeb!important}
-.card-red .card-title{color:#501313}
-.card-red .card-sub{color:#a32d2d}
-.b-red{border-color:#e24b4a!important;background:#fcebeb!important}
-.b-red .b-title{color:#501313}
-.b-red .b-sub{color:#a32d2d}
-.b-red .cta-arrow{background:#f7c1c1}
-
-/* purple */
-.b-pur{border-color:#afa9ec!important;background:#eeedfe!important}
-.b-pur .b-title{color:#26215c}
-.b-pur .b-sub{color:#534ab7}
-.b-pur .cta-arrow{background:#cecbf6}
-.ic-pur{background:#eeedfe}
-
-/* divider */
-.tl-div{height:1px;background:var(--border);margin:10px 0 10px 48px}
-  @media (hover:none) and (pointer:coarse){.print-btn{display:none!important}}
-  .print-btn{display:flex;align-items:center;gap:6px;margin-left:auto;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;transition:background .12s}
-  .print-btn:hover{background:var(--border)}
-  .print-btn svg{display:block}
-@media print {
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-
-  body{background:white!important;padding:0!important;font-size:11pt;color:#000!important}
-  .page{max-width:100%!important}
-  .print-btn,.card-cta,.close-lbl,.detail-hd .close-lbl{display:none!important}
-
-  .tl-line{background:#ccc!important}
-  .tl-dot{border:2pt solid #666!important;background:#f0f0f0!important;color:#000!important;box-shadow:none!important}
-  .card{border:1pt solid #bbb!important;background:white!important;break-inside:avoid;box-shadow:none!important;transform:none!important}
-  .card-amb,.card-cor,.card-red{background:white!important}
-  .card-badge{border:1pt solid #999!important;background:#f0f0f0!important;color:#333!important}
-  .tl-gap{height:3pt!important}
-  .tl-div{border-top:1pt dashed #ccc;margin:8pt 0 8pt 48px}
-  .footer{font-size:9pt;color:#666!important;border-top:1pt solid #ddd;padding-top:6pt;margin-top:12pt}
-  .header{border:1pt solid #ccc!important;background:white!important;break-inside:avoid;margin-bottom:16pt;box-shadow:none!important}
-
-  /* FLOWCHART: Details ausblenden */
-  body.print-flow .detail{display:none!important}
-
-  /* VOLLSTÄNDIG: Details anzeigen */
-  body.print-all .detail{
-    display:block!important;
-    max-height:none!important;
-    overflow:visible!important;
-  }
-
-  /* Default (kein Modus): Details ausblenden */
-  .detail{display:none!important}
-  .print-process .detail-inner{
-    border:1pt solid #ccc!important;
-    background:white!important;
-    break-inside:avoid;
-    margin-bottom:6pt;
-    box-shadow:none!important;
-  }
-  .print-process .detail-hd{border-bottom:1pt solid #eee!important}
-  .print-process .step{background:#f5f5f5!important}
-  .print-process .step-n{background:#ddd!important}
-  .print-process .note{background:#f5f5f5!important}
-  .print-process .note.teal{background:#e8f5f0!important}
-  .print-process .note.amber{background:#fdf5e6!important}
-  .print-process .note.coral{background:#fdf0eb!important}
-  .print-process .note.red{background:#fdf0f0!important}
-  .print-process .tl-item{break-inside:avoid}
-}
+/* Inhalts-Erweiterungen für den Prozess */
+.rcard-body p{color:var(--grau);font-size:.95rem;margin-bottom:10px}
+.rcard-body p:last-child{margin-bottom:0}
+.rcard-body ol,.rcard-body ul{margin:6px 0 12px 2px;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.rcard-body li{font-size:.92rem;color:var(--grau);line-height:1.5}
+.rcard-body li::marker{color:var(--gruen-dunkel);font-weight:700}
+.rcard-body .sub{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gruen-dunkel);margin:14px 0 4px}
+.rcard-body .sub:first-child{margin-top:0}
+.chip-form{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;color:var(--gruen-tief);background:var(--gruen-hell);border:1px solid var(--erf-line);border-radius:999px;padding:4px 12px}
+.inline-note{background:var(--papier);border:1px solid var(--linie);border-radius:12px;padding:11px 14px;font-size:.88rem;color:var(--grau);margin-top:12px;line-height:1.5}
+.inline-note strong{color:var(--gruen-tief)}
+.rcard.rot .rcard-num{color:var(--fail-text);background:var(--fail-bg);border-color:var(--fail-line)}
+.karte.rot::before{background:var(--fail-text)}
+.karte.rot h4{color:var(--fail-text)}
+.karte.rot li::before{color:var(--fail-text)}
+.doc-link{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;color:#fff;background:var(--gruen-dunkel);border:1px solid var(--gruen-dunkel);border-radius:999px;padding:9px 16px;text-decoration:none;transition:background .2s,transform .15s;margin-top:4px}
+.doc-link:hover{background:var(--gruen-tief);transform:translateY(-1px)}
+.doc-link:focus-visible{outline:3px solid var(--gruen-hell);outline-offset:2px}
+.doc-link svg{width:16px;height:16px}
 </style>
 </head>
 <body>
-<div class="page">
-‚
-<!-- HEADER -->
-<div class="header">
-  <div style="flex-shrink:0">
-    <div style="font-size:22px;font-weight:800;color:#2d6a4f;letter-spacing:-0.5px;line-height:1">BBS</div>
-    <div style="font-size:11px;font-weight:600;color:#5f5e5a;letter-spacing:.04em;text-transform:uppercase;margin-top:2px">Nienburg/Weser</div>
-  </div>
-  <div class="header-text">
-    <h1>Fehlzeitenprozess</h1>
-    <p> Karten antippen für Details</p>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:6px;margin-left:auto;width:130px">
-    <button class="print-btn" style="width:100%;justify-content:center" onclick="printMode('flow')" title="Nur Flowchart drucken">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Flowchart
-    </button>
-    <button class="print-btn" style="width:100%;justify-content:center" onclick="printMode('all')" title="Vollständiger Prozess drucken">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Vollständig
-    </button>
-  </div>
-</div>
+<div id="progress" aria-hidden="true"></div>
 
-<div class="timeline">
-
-<!-- ═══ GRUNDREGELN ═══ -->
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-neu">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="BBS Nienburg/Weser – Startseite">
+      <img class="logo-img" src="data:image/png;base64,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" alt="BBS Nienburg/Weser" width="317" height="240">
+    </a>
+    <div class="nav-links">
+      <a href="#grundregeln">Grundregeln</a>
+      <a href="#ablauf">Auslöser &amp; Kontakt</a>
+      <a href="#mahnstufen">Mahnstufen</a>
+      <a href="#weitere">Weitere Fehltage</a>
+      <a href="#dokumentation">Dokumentation</a>
     </div>
-    <div class="tl-line ln-neu"></div>
   </div>
-  <div class="tl-right">
-    <div class="card">
-      <div class="card-head" onclick="tog('c-grund-d')">
-        <div class="card-eyebrow ey-neu">Grundregeln</div>
-        <div class="card-title tt-neu">Meldepflicht &amp; Entschuldigungspflicht</div>
-        <div class="card-sub sub-neu">Sofortige Meldung · schriftliche Entschuldigung am 1. Rückkehrtag</div>
-        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
+</nav>
+
+<header id="top">
+  <div class="blob b1" aria-hidden="true"></div>
+  <div class="blob b2" aria-hidden="true"></div>
+  <div class="hero">
+    <span class="eyebrow">Fehlzeitenprozess · BBS Nienburg/Weser</span>
+    <h1>Umgang mit <span class="akz">unentschuldigtem Fehlen</span></h1>
+    <p>Leitfaden für Klassenlehrkräfte sowie Tutorinnen und Tutoren: von der Melde- und Entschuldigungspflicht über den Sofortkontakt bis zu den Mahnstufen und der Klassenkonferenz nach §&nbsp;61a NSchG.</p>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,64 C240,16 480,16 720,40 C960,64 1200,80 1440,48 L1440,80 L0,80 Z" fill="#F6F9F3"/></svg>
+</header>
+
+<main>
+
+  <!-- ============ GRUNDREGELN ============ -->
+  <section id="grundregeln">
+    <span class="kicker">Grundregeln</span>
+    <h2>Melde- und Entschuldigungspflicht</h2>
+    <p class="lead">Für jedes Fehlen gelten Melde- und Entschuldigungspflicht – auch für einzelne Stunden oder Verspätungen.</p>
+
+    <div class="karten">
+      <div class="karte reveal">
+        <h4>Meldepflicht bei Fehlen</h4>
+        <ul>
+          <li>Unterrichtsversäumnisse sind der Schule unverzüglich zu melden.</li>
+          <li>Meldung per E-Mail an die Klassenlehrkraft bzw. Tutorin/Tutor sowie an alle betroffenen Lehrkräfte.</li>
+          <li>Meldung durch die Lernenden selbst oder durch Erziehungs- und Sorgeberechtigte.</li>
+        </ul>
+      </div>
+      <div class="karte blau reveal">
+        <h4>Schriftliche Entschuldigung</h4>
+        <ul>
+          <li>Für jedes Fehlen ist eine schriftliche Entschuldigung erforderlich – auch für einzelne Stunden oder Verspätungen.</li>
+          <li>Form: eigenhändig unterschriebene Entschuldigung oder ärztliches Attest.</li>
+          <li>Abgabe bei der Klassenlehrkraft bzw. Tutorin/Tutor – persönlich, eingescannt per Mail oder per Post.</li>
+        </ul>
+      </div>
+      <div class="karte reveal">
+        <h4>Fristen</h4>
+        <ul>
+          <li>Abgabe am ersten Schultag der Rückkehr.</li>
+          <li>Vollzeitlernende: bei längerer Abwesenheit spätestens am 4. Krankheitstag.</li>
+          <li>Teilzeitlernende (Auszubildende): spätestens am nächsten Schultag.</li>
+          <li>Verspätet abgegebene Entschuldigungen müssen nicht anerkannt werden.</li>
+        </ul>
+      </div>
+      <div class="karte blau reveal">
+        <h4>Unterschriften</h4>
+        <ul>
+          <li>Minderjährige: Unterschrift der Erziehungs- und Sorgeberechtigten erforderlich.</li>
+          <li>Volljährige: Unterschrift des Lernenden und/oder Erziehungs- und Sorgeberechtigten erforderlich.</li>
+          <li>Auszubildende: generell auch Unterschrift des Ausbildungsbetriebes.</li>
+        </ul>
       </div>
     </div>
-  </div>
-</div>
-<div class="detail" id="c-grund-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📋</div>
-      <div><div class="detail-ey">Grundregeln</div><div class="detail-tt">Meldepflicht &amp; Entschuldigung</div></div>
-      <button class="close-lbl" onclick="tog('c-grund-d')">✕</button>
-    </div>
-    <div class="detail-bd">
+  </section>
 
-      <div class="ib"><div class="ib-head">1 · Meldepflicht bei Fehlen</div><div class="steps">
-        <div class="step"><div class="step-n">→</div><div class="step-t">Unterrichtsversäumnisse sind der Schule <strong>unverzüglich</strong> zu melden.</div></div>
-        <div class="step"><div class="step-n">→</div><div class="step-t">Meldung per <strong>E-Mail</strong> an die Klassenlehrkraft bzw. Tutorin/Tutor <strong>sowie</strong> an alle betroffenen Lehrkräfte.</div></div>
-        <div class="step"><div class="step-n">→</div><div class="step-t">Meldung durch die Lernenden selbst <strong>oder</strong> durch Erziehungs- und Sorgeberechtigte.</div></div>
-      </div></div>
+  <!-- ============ AUSLÖSER & SOFORTKONTAKT ============ -->
+  <section id="ablauf">
+    <span class="kicker">Ablauf</span>
+    <h2>Auslöser und Sofortkontakt</h2>
+    <p class="lead">Ohne Abmeldung gilt das Fehlen ab dem ersten Tag als unentschuldigt – der Kontakt erfolgt sofort.</p>
 
-      <div class="ib"><div class="ib-head">2 · Schriftliche Entschuldigung</div><div class="steps">
-        <div class="step"><div class="step-n">→</div><div class="step-t">Für <strong>jedes</strong> Fehlen ist eine schriftliche Entschuldigung erforderlich — auch für einzelne Stunden oder Verspätungen.</div></div>
-        <div class="step"><div class="step-n">→</div><div class="step-t">Form: <strong>eigenhändig unterschriebene Entschuldigung</strong> oder <strong>ärztliches Attest</strong>.</div></div>
-        <div class="step"><div class="step-n">→</div><div class="step-t">Abgabe bei der <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> — persönlich, eingescannt per Mail oder per Post.</div></div>
-      </div></div>
-
-      <div class="ib"><div class="ib-head">3 · Fristen</div><div class="steps">
-        <div class="step"><div class="step-n">!</div><div class="step-t">Abgabe <strong>am ersten Schultag der Rückkehr</strong>.</div></div>
-        <div class="step"><div class="step-n">!</div><div class="step-t"><strong>Vollzeitlernende:</strong> bei längerer Abwesenheit spätestens am <strong>4. Krankheitstag</strong>.</div></div>
-        <div class="step"><div class="step-n">!</div><div class="step-t"><strong>Teilzeitlernende:</strong> spätestens am nächsten Schultag.</div></div>
-        <div class="step"><div class="step-n">!</div><div class="step-t">Verspätet abgegebene Entschuldigungen <strong>müssen nicht anerkannt werden</strong>.</div></div>
-      </div></div>
-
-      <div class="ib"><div class="ib-head">4 · Unterschriften</div><div class="steps">
-        <div class="step"><div class="step-n">→</div><div class="step-t"><strong>Minderjährige:</strong> Unterschrift der Erziehungs- und Sorgeberechtigten erforderlich.</div></div>
-        <div class="step"><div class="step-n">→</div><div class="step-t"><strong>Auszubildende:</strong> generell auch Unterschrift des <strong>Ausbildungsbetriebes</strong>.</div></div>
-      </div></div>
-
-      <div class="ib"><div class="note amber">Verspätet abgegebene oder fehlende Entschuldigungen führen direkt zur Auslösung des Fehlzeitenprozesses.</div></div>
-
-    </div>
-  </div>
-</div>
-
-<div class="tl-gap"></div>
-<!-- ═══ AUSLÖSER ═══ -->
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-neu">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    </div>
-    <div class="tl-line ln-neu"></div>
-  </div>
-  <div class="tl-right">
-    <div class="card">
-      <div class="card-head" onclick="tog('c0-d')">
-        <div class="card-eyebrow ey-neu">Auslöser</div>
-        <div class="card-title tt-neu">Fehlen ohne Abmeldung</div>
-        <div class="card-sub sub-neu">Keine Abmeldung bei der Lehrkraft am Fehltag</div>
-        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="detail" id="c0-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">⚠️</div>
-      <div><div class="detail-ey">Auslöser</div><div class="detail-tt">Fehlen ohne Abmeldung</div></div>
-      <button class="close-lbl" onclick="tog('c0-d')">✕</button>
-    </div>
-    <div class="detail-bd">
-      <div class="ib"><div class="ib-head">Wann greift der Prozess?</div><div class="steps">
-        <div class="step"><div class="step-n">1</div><div class="step-t">Lernende sind verpflichtet, sich am Fehltag bei der <strong>Klassenlehrkraft bzw. den Tutorinnen und Tutoren abzumelden</strong>. Ohne Abmeldung gilt das Fehlen ab dem <strong>1. Tag als unentschuldigt</strong>.</div></div>
-        <div class="step"><div class="step-n">2</div><div class="step-t">Klassenlehrkraft bzw. Tutorin/Tutor nimmt <strong>sofort Kontakt</strong> mit Erziehungs- und Sorgeberechtigten auf.</div></div>
-
-      </div></div>
-      <div class="ib"><div class="ib-head">Rechtliche Grundlage</div><div class="note">§ 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 – 21-83100 (SVBl. 1/2026 S. 9)</div></div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!-- ═══ SOFORTKONTAKT ═══ -->
-<div class="tl-gap"></div>
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-teal" style="font-size:14px;font-weight:800">§</div>
-    <div class="tl-line ln-teal"></div>
-  </div>
-  <div class="tl-right">
-    <div class="card" style="border-color:#5dcaa5;background:#e1f5ee">
-      <div class="card-head" onclick="tog('c3-d')">
-        <div class="card-badge badge-teal">ab dem 1. Fehltag</div>
-        <div class="card-eyebrow ey-teal">Sofortkontakt</div>
-        <div class="card-title tt-teal">Kontakt mit Erziehungs- und Sorgeberechtigten</div>
-        <div class="card-sub sub-teal">Telefonisch oder persönlich · bei Misserfolg: schriftlich</div>
-        <div class="card-cta cta-teal">Rechtliche Grundlage <span class="cta-arrow" style="background:#9fe1cb">▾</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="detail" id="c3-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic ic-teal" style="font-size:18px">📞</div>
-      <div><div class="detail-ey">Pflicht ab dem 1. Fehltag</div><div class="detail-tt">Kontakt mit Erziehungs- und Sorgeberechtigten</div></div>
-      <button class="close-lbl" onclick="tog('c3-d')">✕</button>
-    </div>
-    <div class="detail-bd">
-      <div class="ib"><div class="ib-head">Rechtliche Grundlage</div><div class="note teal">§ 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 (SVBl. 1/2026 S. 9): <strong>Bei der ersten ungeklärten Fehlzeit</strong> sind Erziehungs- und Sorgeberechtigte zu informieren und ein Gespräch zu suchen, um Sachverhalt und Ursachen zu klären.</div></div>
-      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
-        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Telefonisch oder persönlich</strong> Kontakt mit Erziehungs- und Sorgeberechtigten aufnehmen — durch Klassenlehrkraft bzw. Tutorin/Tutor.</div></div>
-        <div class="step"><div class="step-n">2</div><div class="step-t">Ggf. <strong>Beratungsgespräch</strong> mit Schulsozialarbeit anbieten.</div></div>
-        <div class="step"><div class="step-n">3</div><div class="step-t">Kein Kontakt möglich → <strong>schriftlich</strong> informieren.</div></div>
-        <div class="step"><div class="step-n">4</div><div class="step-t">Alles in dem <strong>Gesprächsprotokoll</strong> dokumentieren.</div></div>
-      </div></div>
-      <div class="ib"><div class="ib-head">Volljährige Lernende</div><div class="note">Kontakt direkt mit der/dem Lernenden — Wenn diese nicht möglich ist, dann mit Erziehungs- und Sorgeberechtigten.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ 1. MAHNSCHREIBEN ═══ -->
-<div class="tl-gap"></div>
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-amb">1</div>
-    <div class="tl-line ln-amb"></div>
-  </div>
-  <div class="tl-right">
-    <div class="card card-amb">
-      <div class="card-head" onclick="tog('c4-d')">
-        <div class="card-badge badge-amb">nach 3 Fehltagen</div>
-        <div class="card-eyebrow ey-amb">Mahnstufe 1</div>
-        <div class="card-title tt-amb">Unentschuldigtes Fernbleiben vom Unterricht</div>
-        <div class="card-sub sub-amb">Formular: Erste Mahnung Unterrichtsversäumnisse</div>
-        <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="detail" id="c4-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic ic-amb" style="font-size:18px">✉️</div>
-      <div><div class="detail-ey">Mahnstufe 1</div><div class="detail-tt">Erste Mahnung Unterrichtsversäumnisse</div></div>
-      <button class="close-lbl" onclick="tog('c4-d')">✕</button>
-    </div>
-    <div class="detail-bd">
-      <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Erste Mahnung Unterrichtsversäumnisse</span></div></div>
-      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
-        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe 1 ein.</div></div>
-        <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> erstellt und versendet den Brief.</div></div>
-        <div class="step"><div class="step-n">3</div><div class="step-t">Brief wird von <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> unterschrieben.</div></div>
-        <div class="step"><div class="step-n">4</div><div class="step-t">Ggf. <strong>Schulsozialarbeit</strong> einbeziehen.</div></div>
-      </div></div>
-      <div class="ib"><div class="ib-head">Inhalt</div><div class="note amber">Hinweis Schulpflicht · Aufforderung zur Entschuldigung · Ankündigung Bußgeld (bei Schulpflicht) · Ankündigung ärztliche Attestpflicht · Hinweis Schulsozialarbeit</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ 2. MAHNSCHREIBEN ═══ -->
-<div class="tl-gap"></div>
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-amb">2</div>
-    <div class="tl-line ln-cor"></div>
-  </div>
-  <div class="tl-right">
-    <div class="card card-amb">
-      <div class="card-head" onclick="tog('c5-d')">
-        <div class="card-badge badge-amb">nach 3 weiteren Tagen</div>
-        <div class="card-eyebrow ey-amb">Mahnstufe 2</div>
-        <div class="card-title tt-amb">Nachweispflicht Erkrankung</div>
-        <div class="card-sub sub-amb">Ärztliches Attest Pflicht · Einladung zum Gespräch</div>
-        <div class="card-cta cta-amb">Formular &amp; Ablauf <span class="cta-arrow" style="background:#faeeda">▾</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="detail" id="c5-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic ic-amb" style="font-size:18px">📋</div>
-      <div><div class="detail-ey">Mahnstufe 2</div><div class="detail-tt">Nachweispflicht der Erkrankung</div></div>
-      <button class="close-lbl" onclick="tog('c5-d')">✕</button>
-    </div>
-    <div class="detail-bd">
-      <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Zweite Mahnung Unterrichtsversäumnisse</span></div></div>
-      <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
-        <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe nach Rücksprache mit der zuständigen Abteilungsleitung ein.</div></div>
-        <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> versendet Brief mit konkretem <strong>Gesprächstermin</strong>.</div></div>
-        <div class="step"><div class="step-n">3</div><div class="step-t">Brief wird von <strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> unterschrieben.</div></div>
-      </div></div>
-      <div class="ib"><div class="ib-head">Inhalt</div><div class="note amber">Ab sofort <strong>ärztliches Attest Pflicht</strong> · Einladung mit Erziehungs- und Sorgeberechtigten · Ankündigung Ordnungsamt (bei Schulpflicht) · Ankündigung der Prüfung, ob ein erfolgreicher Besuch der Schulform nach § 61a NSchG zu erwarten ist (keine Schulpflicht)</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ ENTSCHEIDUNG + STRÄNGE ═══ -->
-<div class="tl-gap"></div>
-<div class="conn"><div class="conn-line" style="background:#f0997b"></div></div>
-
-<!-- Weitere unentschuldigte Fehltage -->
-<div style="margin-left:48px;margin-bottom:8px">
-  <div style="background:#faece7;border:1px solid #d85a30;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;color:#4a1b0c;text-align:center">
-    Weitere unentschuldigte Fehltage
-  </div>
-</div>
-
-<!-- Verzweigungspunkt + zwei Spalten im tl-item-Stil -->
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot" style="background:#faece7;border:2px solid #d85a30;color:#4a1b0c;font-size:13px;font-weight:800">3</div>
-    <div class="tl-line" style="background:#f0997b"></div>
-  </div>
-  <div class="tl-right" style="padding-bottom:6px">
-
-    <!-- Labels mit integrierten Strichen -->
-    <div style="display:flex;gap:10px;margin-bottom:0">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-        <div style="font-size:11px;font-weight:600;color:#a32d2d;letter-spacing:.04em;text-transform:uppercase">Schulpflichtig</div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
-        <div style="font-size:11px;font-weight:600;color:#534ab7;letter-spacing:.04em;text-transform:uppercase">Nicht schulpflichtig</div>
+    <div class="rcard reveal">
+      <div class="rcard-head"><span class="rcard-num">!</span><h3>Fehlen ohne Abmeldung</h3><span class="tag">Auslöser</span></div>
+      <div class="rcard-body">
+        <div class="sub">Wann greift der Prozess?</div>
+        <ol>
+          <li>Lernende sind verpflichtet, sich am Fehltag bei der Klassenlehrkraft bzw. den Tutorinnen und Tutoren abzumelden. Ohne Abmeldung gilt das Fehlen ab dem 1. Tag als unentschuldigt.</li>
+          <li>Klassenlehrkraft bzw. Tutorin/Tutor nimmt sofort Kontakt mit Erziehungs- und Sorgeberechtigten auf.</li>
+        </ol>
+        <div class="inline-note"><strong>Rechtliche Grundlage:</strong> § 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 – 21-83100 (SVBl. 1/2026 S. 9).</div>
       </div>
     </div>
 
-    <!-- Zwei Spalten -->
-    <div style="display:flex;gap:10px;align-items:flex-start">
-
-      <!-- LINKS: Schulpflichtig -->
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
-        <div class="card card-cor" onclick="tog('d-m3')" style="cursor:pointer;border-top:3px solid #f0997b">
-          <div class="card-head">
-            <div class="card-badge badge-cor">ab 6 unentschuldigten Fehltagen</div>
-            <div class="card-eyebrow ey-cor">Mahnstufe 3</div>
-            <div class="card-title tt-cor">Letztes Schreiben + Anzeige</div>
-            <div class="card-sub sub-cor">Fortgesetzte Schulpflichtverletzung</div>
-            <div class="card-cta cta-cor">Details <span id="arr-m3" class="cta-arrow" style="background:#faece7">▾</span></div>
-          </div>
-        </div>
-        <div id="d-m3" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-          <div class="detail-inner" style="margin-top:4px">
-            <div class="detail-hd">
-              <div class="detail-ic ic-cor" style="font-size:18px">🚨</div>
-              <div><div class="detail-ey">Mahnstufe 3</div><div class="detail-tt">Letztes Schreiben + Anzeige</div></div>
-              <button class="close-lbl" onclick="tog('d-m3')">✕</button>
-            </div>
-            <div class="detail-bd">
-              <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Dritte Mahnung/Anzeige Ordnungswidrigkeit</span></div></div>
-              <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
-                <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Klassenlehrkraft bzw. Tutorin/Tutor</strong> leitet die Mahnstufe nach Rücksprache mit der zuständigen Abteilungsleitung ein.</div></div>
-                <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Sekretariat</strong> versendet letztes Schreiben.</div></div>
-                <div class="step"><div class="step-n">3</div><div class="step-t"><strong>Anzeige</strong> beim Ordnungsamt Nienburg/Weser.</div></div>
-                <div class="step"><div class="step-n">4</div><div class="step-t">Schulsozialarbeit intensiviert <strong>Kontaktversuche</strong>.</div></div>
-              </div></div>
-              <div class="ib"><div class="note coral">Bußgeld wird erhoben · Schulsozialarbeit bleibt aktiv</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Trennlinie -->
-      <div style="width:1px;background:rgba(0,0,0,0.1);border-radius:1px;align-self:stretch;margin-top:0"></div>
-
-      <!-- RECHTS: Nicht schulpflichtig -->
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
-        <div class="card" style="border-color:#afa9ec;background:#eeedfe;cursor:pointer;border-top:3px solid #afa9ec" onclick="tog('d-klass')">
-          <div class="card-head">
-            <div class="card-badge" style="background:#cecbf6;color:#26215c">ab 6 unentschuldigten Fehltagen oder Kursfehlstunden</div>
-            <div class="card-eyebrow" style="color:#534ab7">Klassenkonferenz</div>
-            <div class="card-title" style="color:#26215c;font-size:14px">Prüfung, ob erfolgreicher Schulbesuch zu erwarten ist</div>
-            <div class="card-sub" style="color:#534ab7">§ 61a NSchG</div>
-            <div class="card-cta" style="color:#534ab7">Details <span id="arr-klass" class="cta-arrow" style="background:#eeedfe">▾</span></div>
-          </div>
-        </div>
-        <div id="d-klass" style="max-height:0;overflow:hidden;transition:max-height .28s ease">
-          <div class="detail-inner" style="margin-top:4px">
-            <div class="detail-hd">
-              <div class="detail-ic ic-pur" style="font-size:18px">📄</div>
-              <div><div class="detail-ey">Klassenkonferenz</div><div class="detail-tt">Prüfung, ob erfolgreicher Schulbesuch zu erwarten ist</div></div>
-              <button class="close-lbl" onclick="tog('d-klass')">✕</button>
-            </div>
-            <div class="detail-bd">
-              <div class="ib"><div class="ib-head">Formular</div><div class="chips"><span class="chip">Dritte Mahnung/Klassenkonferenz § 61a NSchG</span></div></div>
-              <div class="ib"><div class="ib-head">Ablauf</div><div class="steps">
-                <div class="step"><div class="step-n">1</div><div class="step-t">Aufforderung zur <strong>sofortigen Unterrichtsteilnahme</strong>.</div></div>
-                <div class="step"><div class="step-n">2</div><div class="step-t">Prüfung ob erfolgreicher Schulbesuch nach <strong>§ 61a NSchG</strong> zu erwarten ist — Klassenkonferenz.</div></div>
-                <div class="step"><div class="step-n">3</div><div class="step-t">Angebot eines <strong>Beratungsgesprächs</strong>.</div></div>
-                <div class="step"><div class="step-n">4</div><div class="step-t">Keine Reaktion → <strong>Abmeldung</strong> von der Schule mit Wirkung ab konkretem Datum.</div></div>
-              </div></div>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:center;margin-top:4px"><div style="width:2px;height:12px;background:#cecbf6;border-radius:1px"></div></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="tl-gap"></div>
-<!-- ═══ GESPRÄCHSNOTIZ ═══ -->
-<div class="tl-div"></div>
-
-<div class="tl-item">
-  <div class="tl-left">
-    <div class="tl-dot dot-neu">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-    </div>
-  </div>
-  <div class="tl-right">
-    <div class="card">
-      <div class="card-head" onclick="tog('c10-d')">
-        <div class="card-eyebrow ey-neu">Dokumentation</div>
-        <div class="card-title tt-neu">Gesprächsprotokoll</div>
-        <div class="card-sub sub-neu">Alle Gespräche schriftlich festhalten</div>
-        <div class="card-cta cta-neu">Details <span class="cta-arrow">▾</span></div>
+    <div class="rcard reveal">
+      <div class="rcard-head"><span class="rcard-num">§</span><h3>Sofortkontakt mit Erziehungs- und Sorgeberechtigten</h3><span class="tag">ab 1. Fehltag</span></div>
+      <div class="rcard-body">
+        <p>Telefonisch oder persönlich – bei Misserfolg schriftlich.</p>
+        <div class="sub">Ablauf</div>
+        <ol>
+          <li>Telefonisch oder persönlich Kontakt mit Erziehungs- und Sorgeberechtigten aufnehmen – durch Klassenlehrkraft bzw. Tutorin/Tutor.</li>
+          <li>Ggf. Beratungsgespräch mit der Schulsozialarbeit anbieten.</li>
+          <li>Kein Kontakt möglich → schriftlich informieren.</li>
+          <li>Alles im Gesprächsprotokoll dokumentieren.</li>
+        </ol>
+        <div class="inline-note"><strong>Volljährige Lernende:</strong> Kontakt direkt mit der/dem Lernenden – wenn dies nicht möglich ist, dann mit den Erziehungs- und Sorgeberechtigten.</div>
+        <div class="inline-note"><strong>Rechtliche Grundlage:</strong> § 58 NSchG i. V. m. RdErl. d. MK v. 08.12.2025 (SVBl. 1/2026 S. 9): Bei der ersten ungeklärten Fehlzeit sind Erziehungs- und Sorgeberechtigte zu informieren und ein Gespräch zu suchen, um Sachverhalt und Ursachen zu klären.</div>
       </div>
     </div>
-  </div>
-</div>
-<div class="detail" id="c10-d">
-  <div class="detail-inner">
-    <div class="detail-hd">
-      <div class="detail-ic" style="background:#f2f1ed;font-size:18px">📝</div>
-      <div><div class="detail-ey">Dokumentation</div><div class="detail-tt">Gesprächsprotokoll</div></div>
-      <button class="close-lbl" onclick="tog('c10-d')">✕</button>
-    </div>
-    <div class="detail-bd">
-      <div class="ib"><div class="steps">
-        <div class="step"><div class="step-n">1</div><div class="step-t">Name der/des Lernenden, Klasse, Klassenlehrkraft.</div></div>
-        <div class="step"><div class="step-n">2</div><div class="step-t">Gesprächspartner:in, Datum und Uhrzeit.</div></div>
-        <div class="step"><div class="step-n">3</div><div class="step-t">Art: persönlich oder telefonisch.</div></div>
-        <div class="step"><div class="step-n">4</div><div class="step-t">Stichpunkte zum Inhalt und Vereinbarungen.</div></div>
-        <div class="step"><div class="step-n">5</div><div class="step-t"><strong>Unterschrift</strong> der Klassenlehrkraft bzw. Tutorin/Tutor.</div></div>
-      </div></div>
-    </div>
-  </div>
-</div>
+  </section>
 
-<div class="footer">BBS Nienburg/Weser · Fehlzeitenprozess · Stand 07. Juni 2026</div>
+  <!-- ============ MAHNSTUFEN ============ -->
+  <section id="mahnstufen">
+    <span class="kicker">Eskalation</span>
+    <h2>Mahnstufen 1 und 2</h2>
+    <p class="lead">Bei fortgesetztem unentschuldigtem Fehlen folgen die schriftlichen Mahnstufen.</p>
 
-</div>
-</div>
+    <div class="rcard reveal">
+      <div class="rcard-head"><span class="rcard-num">1</span><h3>Unentschuldigtes Fernbleiben vom Unterricht</h3><span class="tag">nach 3 Fehltagen</span></div>
+      <div class="rcard-body">
+        <div class="sub">Dokument</div>
+        <span class="chip-form">Erste Mahnung Unterrichtsversäumnisse</span>
+        <div class="sub">Ablauf</div>
+        <ol>
+          <li>Klassenlehrkraft bzw. Tutorin/Tutor leitet die Mahnstufe 1 ein.</li>
+          <li>Sekretariat erstellt und versendet den Brief.</li>
+          <li>Ggf. Schulsozialarbeit einbeziehen.</li>
+        </ol>
+        <div class="inline-note"><strong>Inhalt:</strong> Hinweis Schulpflicht · Aufforderung zur Entschuldigung · Ankündigung Bußgeld (bei Schulpflicht) · Ankündigung ärztliche Attestpflicht · Hinweis Schulsozialarbeit.</div>
+      </div>
+    </div>
+
+    <div class="rcard reveal">
+      <div class="rcard-head"><span class="rcard-num">2</span><h3>Nachweispflicht der Erkrankung</h3><span class="tag">nach 3 weiteren Tagen</span></div>
+      <div class="rcard-body">
+        <div class="sub">Dokument</div>
+        <span class="chip-form">Zweite Mahnung Unterrichtsversäumnisse</span>
+        <div class="sub">Ablauf</div>
+        <ol>
+          <li>Klassenlehrkraft bzw. Tutorin/Tutor leitet die Mahnstufe 2 nach Rücksprache mit der zuständigen Abteilungsleitung ein.</li>
+          <li>Sekretariat versendet den Brief mit konkretem Gesprächstermin.</li>
+        </ol>
+        <div class="inline-note"><strong>Inhalt:</strong> Ab sofort ärztliche Attestpflicht · Einladung der Erziehungs- und Sorgeberechtigten zum Gespräch · Ankündigung einer Meldung an das Ordnungsamt (bei Schulpflicht) · Ankündigung der Prüfung, ob ein erfolgreicher Besuch der Schulform nach § 61a NSchG zu erwarten ist (ohne Schulpflicht).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEITERE FEHLTAGE (VERZWEIGUNG) ============ -->
+  <section id="weitere">
+    <span class="kicker">Weitere unentschuldigte Fehltage</span>
+    <h2>Ab 6 Fehltagen: zwei Wege</h2>
+    <p class="lead">Das weitere Vorgehen richtet sich danach, ob die/der Lernende schulpflichtig ist.</p>
+
+    <div class="karten">
+      <div class="karte rot reveal">
+        <h4>Schulpflichtig · Mahnstufe 3 – Letztes Schreiben + Anzeige</h4>
+        <p style="font-size:.85rem;color:var(--grau);margin:-4px 0 10px">ab 6 unentschuldigten Fehltagen · fortgesetzte Schulpflichtverletzung</p>
+        <div class="sub" style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--fail-text);margin-bottom:4px">Dokument</div>
+        <p style="margin-bottom:10px"><span class="chip-form" style="color:var(--fail-text);background:var(--fail-bg);border-color:var(--fail-line)">Dritte Mahnung / Anzeige Ordnungswidrigkeit</span></p>
+        <ul>
+          <li>Klassenlehrkraft bzw. Tutorin/Tutor leitet die Mahnstufe nach Rücksprache mit der zuständigen Abteilungsleitung ein.</li>
+          <li>Sekretariat versendet das letzte Schreiben.</li>
+          <li>Anzeige beim Ordnungsamt Nienburg/Weser.</li>
+          <li>Schulsozialarbeit intensiviert die Kontaktversuche.</li>
+        </ul>
+        <div class="inline-note" style="border-color:var(--fail-line);background:var(--fail-bg)"><strong style="color:var(--fail-text)">Folge:</strong> Bußgeld wird erhoben · Schulsozialarbeit bleibt aktiv.</div>
+      </div>
+
+      <div class="karte blau reveal">
+        <h4>Nicht schulpflichtig · Klassenkonferenz nach § 61a NSchG</h4>
+        <p style="font-size:.85rem;color:var(--grau);margin:-4px 0 10px">ab 6 unentschuldigten Fehltagen oder Kursfehlstunden</p>
+        <div class="sub" style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--blau-dunkel);margin-bottom:4px">Dokument</div>
+        <p style="margin-bottom:10px"><span class="chip-form" style="color:var(--blau-dunkel);background:var(--blau-hell);border-color:#CBDAF0">Dritte Mahnung / Klassenkonferenz § 61a NSchG</span></p>
+        <ul>
+          <li>Aufforderung zur sofortigen Unterrichtsteilnahme.</li>
+          <li>Prüfung, ob ein erfolgreicher Schulbesuch nach § 61a NSchG zu erwarten ist – Klassenkonferenz.</li>
+          <li>Angebot eines Beratungsgesprächs.</li>
+          <li>Schulsozialarbeit intensiviert die Kontaktversuche.</li>
+          <li>Keine Reaktion → Abmeldung von der Schule mit Wirkung ab konkretem Datum.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOKUMENTATION ============ -->
+  <section id="dokumentation">
+    <span class="kicker">Dokumentation</span>
+    <h2>Gesprächsprotokoll</h2>
+    <p class="lead">Alle Gespräche werden schriftlich festgehalten.</p>
+
+    <div class="rcard reveal">
+      <div class="rcard-head"><span class="rcard-num">✓</span><h3>Inhalte des Protokolls</h3><span class="tag">für jedes Gespräch</span></div>
+      <div class="rcard-body">
+        <ol>
+          <li>Name der/des Lernenden, Klasse, Klassenlehrkraft.</li>
+          <li>Gesprächspartner:in, Datum und Uhrzeit.</li>
+          <li>Art: persönlich oder telefonisch.</li>
+          <li>Stichpunkte zum Inhalt und Vereinbarungen.</li>
+          <li>Unterschrift der Klassenlehrkraft bzw. Tutorin/Tutor.</li>
+        </ol>
+        <div class="sub">Vorlage</div>
+        <!-- Link zur Gesprächsprotokoll-Vorlage (IServ) -->
+        <a class="doc-link" href="https://bbs-nienburg.de/iserv/file/-/Groups/Berufliches%20Gymnasium%20-%20Dokumente/Prozesse_Anleitungen/Fehlzeiten/Gespr%C3%A4chsprotokoll_Fehlzeiten.docx?show=true" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Gesprächsprotokoll öffnen (Word-Vorlage)
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div><strong>BBS Nienburg/Weser</strong> · Fehlzeitenprozess</div>
+    <div>Stand 07. Juni 2026</div>
+  </div>
+</footer>
+
 <script>
-function tog(id) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  var isOpen = el.style.maxHeight && el.style.maxHeight !== '0px' && el.style.maxHeight !== '0';
-  el.style.maxHeight = isOpen ? '0' : '1400px';
-}
-function printMode(mode) {
-  var body = document.body;
-  var proc = document.getElementById('print-process');
-  if (mode === 'flow') {
-    body.classList.remove('print-all');
-    body.classList.add('print-flow');
-    if (proc) proc.style.display = 'none';
-  } else {
-    body.classList.remove('print-flow');
-    body.classList.add('print-all');
-    if (proc) proc.style.display = 'block';
+(function(){
+  var el = function(id){ return document.getElementById(id); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Fortschrittsbalken */
+  var bar = el('progress');
+  function onScroll(){ var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?((h.scrollTop||document.body.scrollTop)/max*100):0).toFixed(2)+'%'; }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* Reveal beim Scrollen */
+  var targets = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ targets.forEach(function(t){t.classList.add('vis');}); }
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    targets.forEach(function(t){io.observe(t);});
   }
-  window.print();
-  setTimeout(function() {
-    body.classList.remove('print-flow','print-all');
-    if (proc) proc.style.display = 'none';
-  }, 1000);
-}
+
+  /* Scrollspy für die Navigation */
+  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]')), map={};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1), s=document.getElementById(id); if(s)map[id]=a; });
+  var secs=Object.keys(map).map(function(id){return document.getElementById(id);});
+  if('IntersectionObserver' in window){
+    var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active');});var a=map[e.target.id];if(a)a.classList.add('active');}});},{rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(function(s){nio.observe(s);});
+  }
+})();
 </script>
 </body>
 </html>
